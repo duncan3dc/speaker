@@ -12,6 +12,7 @@
         "role": "Developer"
     }],
     "require": {
+        "guzzlehttp/guzzle": "^5.2",
         "php": ">=5.4.0"
     },
     "require-dev": {
