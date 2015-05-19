@@ -2,7 +2,6 @@
 
 namespace duncan3dc\Speaker\Test;
 
-use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech;
 use Mockery;
 use Regatta\Hive\Files\Filesystem;
@@ -14,7 +13,7 @@ class TextToSpeechTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->provider = Mockery::mock(ProviderInterface::class);
+        $this->provider = Mockery::mock("duncan3dc\\Speaker\\Providers\\ProviderInterface");
     }
 
 
