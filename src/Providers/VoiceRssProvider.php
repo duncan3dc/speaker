@@ -86,6 +86,20 @@ class VoiceRssProvider extends AbstractProvider
 
 
     /**
+     * Get the current options.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return [
+            "language"  =>  $this->language,
+            "speed"     =>  $this->speed,
+        ];
+    }
+
+
+    /**
      * Convert the specified text to mp3 audio.
      *
      * @param string $text The text to convert

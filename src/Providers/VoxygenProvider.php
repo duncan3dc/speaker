@@ -48,6 +48,19 @@ class VoxygenProvider extends AbstractProvider
 
 
     /**
+     * Get the current options.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return [
+            "voice" =>  $this->voice,
+        ];
+    }
+
+
+    /**
      * Convert the specified text to mp3 audio.
      *
      * @param string $text The text to convert

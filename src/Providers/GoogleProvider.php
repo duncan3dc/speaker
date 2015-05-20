@@ -46,6 +46,19 @@ class GoogleProvider extends AbstractProvider
 
 
     /**
+     * Get the current options.
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return [
+            "language"  =>  $this->language,
+        ];
+    }
+
+
+    /**
      * Convert the specified text to mp3 audio.
      *
      * @param string $text The text to convert
