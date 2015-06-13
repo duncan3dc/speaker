@@ -12,9 +12,8 @@
         "role": "Developer"
     }],
     "require": {
-        "guzzlehttp/guzzle": "^5.2",
-        "guzzlehttp/ringphp": "^1.0.7",
-        "php": ">=5.4.0"
+        "guzzlehttp/guzzle": "^6.0",
+        "php": ">=5.5.0"
     },
     "require-dev": {
         "mockery/mockery": ">=0.9.4"
