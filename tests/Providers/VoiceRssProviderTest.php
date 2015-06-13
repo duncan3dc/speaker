@@ -3,6 +3,8 @@
 namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Providers\VoiceRssProvider;
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Response;
 use Mockery;
 
 class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
@@ -11,7 +13,7 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = Mockery::mock("GuzzleHttp\\Client");
+        $this->client = Mockery::mock(Client::class);
     }
 
 
@@ -26,7 +28,7 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new VoiceRssProvider("APIKEY");
         $provider->setClient($this->client);
 
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
@@ -44,7 +46,7 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new VoiceRssProvider("APIKEY");
         $provider->setClient($this->client);
 
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("ERROR: Test Message");
 
@@ -65,7 +67,7 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
 
         $provider->setLanguage("fr");
 
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
@@ -94,7 +96,7 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
 
         $provider->setSpeed(-5);
 
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 

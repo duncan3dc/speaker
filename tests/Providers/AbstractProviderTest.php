@@ -2,7 +2,9 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
-use duncan3dc\Speaker\TextToSpeech;
+use duncan3dc\Speaker\Exception;
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Response;
 use Mockery;
 
 class AbstractProviderTest extends \PHPUnit_Framework_TestCase
@@ -12,7 +14,7 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = Mockery::mock("GuzzleHttp\\Client");
+        $this->client = Mockery::mock(Client::class);
         $this->provider = new ExampleProvider;
         $this->provider->setClient($this->client);
     }
@@ -27,13 +29,13 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
     public function testGetClient()
     {
         $this->provider = new ExampleProvider;
-        $this->assertInstanceOf("GuzzleHttp\\Client", $this->provider->getClient());
+        $this->assertInstanceOf(Client::class, $this->provider->getClient());
     }
 
 
     public function testSendRequest()
     {
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
@@ -48,7 +50,7 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testSendRequestFailure()
     {
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("500");
 
         $this->client->shouldReceive("get")
@@ -56,7 +58,7 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
             ->with("http://example.com/?text=Hello")
             ->andReturn($response);
 
-        $this->setExpectedException("duncan3dc\\Speaker\\Exception", "Failed to call the external text-to-speech service");
+        $this->setExpectedException(Exception::class, "Failed to call the external text-to-speech service");
         $this->provider->textToSpeech("Hello");
     }
 }

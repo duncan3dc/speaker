@@ -3,6 +3,8 @@
 namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Providers\GoogleProvider;
+use GuzzleHttp\Client;
+use GuzzleHttp\Message\Response;
 use Mockery;
 
 class GoogleProviderTest extends \PHPUnit_Framework_TestCase
@@ -11,7 +13,7 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = Mockery::mock("GuzzleHttp\\Client");
+        $this->client = Mockery::mock(Client::class);
     }
 
 
@@ -26,7 +28,7 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new GoogleProvider("en");
         $provider->setClient($this->client);
 
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
@@ -46,7 +48,7 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
 
         $provider->setLanguage("fr");
 
-        $response = Mockery::mock("GuzzleHttp\\Message\\Response");
+        $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
