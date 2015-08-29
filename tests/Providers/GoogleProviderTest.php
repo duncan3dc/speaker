@@ -34,7 +34,7 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->client->shouldReceive("get")
             ->once()
-            ->with("http://translate.google.com/translate_tts?q=Hello&tl=en")
+            ->with("http://translate.google.com/translate_tts?q=Hello&tl=en&client=duncan3dc%2Fspeaker")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));
@@ -54,7 +54,7 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->client->shouldReceive("get")
             ->once()
-            ->with("http://translate.google.com/translate_tts?q=Hello&tl=fr")
+            ->with("http://translate.google.com/translate_tts?q=Hello&tl=fr&client=duncan3dc%2Fspeaker")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));
