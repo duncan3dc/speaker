@@ -1,9 +1,10 @@
 Getting Started:
-    Introduction: /
-    Installation: /installation/
-    Usage: /usage/
+  Introduction: /
+  Installation: /installation/
+  Usage: /usage/
 
 Providers:
-    Google: /providers/google/
-    VoiceRSS: /providers/voice-rss/
-    Voxygen: /providers/voxygen/
+  Acapela: /providers/acapela/
+  Google: /providers/google/
+  VoiceRSS: /providers/voice-rss/
+  Voxygen: /providers/voxygen/
