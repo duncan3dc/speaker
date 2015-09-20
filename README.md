@@ -20,6 +20,7 @@ _Read more at http://duncan3dc.github.io/speaker/_
 
 
 ## Services
+* __Acapela__ - _Paid voice as a service_
 * __Google__ - _Unadvertised service with 100 character limit_
 * __Voxygen__ - _Text to speech specialists_
 * __Voice RSS__ - _Free/paid service requires [registration](http://www.voicerss.org/personel/)_
