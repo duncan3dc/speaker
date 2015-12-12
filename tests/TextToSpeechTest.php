@@ -43,12 +43,16 @@ class TextToSpeechTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andReturn(["language" => "en"]);
 
+        $this->provider->shouldReceive("getFormat")
+            ->once()
+            ->andReturn("wav");
+
         $reflected = new \ReflectionClass($this->tts);
         $method = $reflected->getMethod("generateFilename");
         $method->setAccessible(true);
         $filename = $method->invoke($this->tts);
 
-        $this->assertSame("5ee35ff512372af8cee8ddf79edec5ea.mp3", $filename);
+        $this->assertSame("5ee35ff512372af8cee8ddf79edec5ea.wav", $filename);
     }
 
 
@@ -70,6 +74,10 @@ class TextToSpeechTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFile()
     {
+        $this->provider->shouldReceive("getFormat")
+            ->twice()
+            ->andReturn("mp3");
+
         $this->provider->shouldReceive("getOptions")
             ->twice()
             ->andReturn(["language" => "en"]);

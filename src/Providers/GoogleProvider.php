@@ -3,7 +3,7 @@
 namespace duncan3dc\Speaker\Providers;
 
 /**
- * Convert a string of a text to a spoken word mp3.
+ * Convert a string of a text to spoken word audio.
  */
 class GoogleProvider extends AbstractProvider
 {
@@ -59,11 +59,11 @@ class GoogleProvider extends AbstractProvider
 
 
     /**
-     * Convert the specified text to mp3 audio.
+     * Convert the specified text to audio.
      *
      * @param string $text The text to convert
      *
-     * @return string The mp3 audio data
+     * @return string The audio data
      */
     public function textToSpeech($text)
     {
