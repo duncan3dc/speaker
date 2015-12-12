@@ -5,6 +5,16 @@ Changelog
 
 --------
 
+## 0.7.0 - 2016-09-12
+
+### Changed
+
+* [TextToSpeech] Made generateFilename() public.
+* [Providers] Picotts provider.
+* [Support] Drop support for php5.5
+
+--------
+
 ## 0.6.0 - 2015-08-29
 
 ### Changed
