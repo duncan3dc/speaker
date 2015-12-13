@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.7.2 - 2017-03-01
+
+### Fixed
+
+* [Providers] Use symfony/process within the Picotts provider for shell commands.
+
+--------
+
 ## 0.7.1 - 2017-02-05
 
 ### Fixed

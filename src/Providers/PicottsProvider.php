@@ -4,6 +4,7 @@ namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exception;
 use duncan3dc\Speaker\Providers\AbstractProvider;
+use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Convert a string of a text to a spoken word wav.
@@ -98,20 +99,21 @@ class PicottsProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech($text, ProcessBuilder $process = null)
     {
         $filename = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "speaker_picotts.wav";
 
-        $cmd = escapeshellcmd($this->pico);
-        $cmd .= " --wave=" . escapeshellarg($filename);
-        $cmd .= " --lang=" . escapeshellarg($this->language);
-        $cmd .= " " . escapeshellarg($text);
-
-        exec($cmd, $output, $return);
-
-        if ($return > 0) {
-            throw new Exception("TextToSpeech " . implode("\n", $output));
+        if ($process === null) {
+            $process = new ProcessBuilder;
         }
+
+        $process
+            ->setPrefix($this->pico)
+            ->add("--wave={$filename}")
+            ->add("--lang={$this->language}")
+            ->add($text)
+            ->getProcess()
+            ->run();
 
         if (!file_exists($filename)) {
             throw new Exception("TextToSpeech unable to create file: {$filename}");
