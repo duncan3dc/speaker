@@ -26,10 +26,22 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testGetFormat()
+    {
+        $this->assertSame("mp3", $this->provider->getFormat());
+    }
+
+
+    public function testGetOptions()
+    {
+        $this->assertSame([], $this->provider->getOptions());
+    }
+
+
     public function testGetClient()
     {
-        $this->provider = new ExampleProvider;
-        $this->assertInstanceOf(Client::class, $this->provider->getClient());
+        $provider = new ExampleProvider;
+        $this->assertInstanceOf(Client::class, $provider->getClient());
     }
 
 

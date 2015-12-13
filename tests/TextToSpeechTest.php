@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Speaker\Test;
 
+use duncan3dc\Speaker\Exception;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech;
 use Mockery;
@@ -69,6 +70,22 @@ class TextToSpeechTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame("test-mp3-data", file_get_contents($tmp));
         unlink($tmp);
+    }
+
+
+    public function testSaveFail()
+    {
+        error_reporting(E_ALL ^ E_WARNING);
+
+        $this->provider->shouldReceive("textToSpeech")
+            ->once()
+            ->with("hello")
+            ->andReturn("test-mp3-data");
+
+        $path = "/no/such/path/test.mp3";
+
+        $this->setExpectedException(Exception::class, "Unable to save the file ({$path})");
+        $this->tts->save($path);
     }
 
 

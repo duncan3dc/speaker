@@ -123,4 +123,13 @@ class AcapelaProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($options, $provider->getOptions());
     }
+
+
+    public function testSendRequestFailure()
+    {
+        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
+
+        $this->setExpectedException("InvalidArgumentException", "Only messages under 300 characters are supported");
+        $provider->textToSpeech(str_repeat("A", 301));
+    }
 }
