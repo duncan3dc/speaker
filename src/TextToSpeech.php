@@ -57,7 +57,7 @@ class TextToSpeech
      *
      * @return string
      */
-    protected function generateFilename()
+    public function generateFilename()
     {
         $options = $this->provider->getOptions();
 

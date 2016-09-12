@@ -48,10 +48,7 @@ class TextToSpeechTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andReturn("wav");
 
-        $reflected = new \ReflectionClass($this->tts);
-        $method = $reflected->getMethod("generateFilename");
-        $method->setAccessible(true);
-        $filename = $method->invoke($this->tts);
+        $filename = $this->tts->generateFilename();
 
         $this->assertSame("5ee35ff512372af8cee8ddf79edec5ea.wav", $filename);
     }
