@@ -6,7 +6,7 @@ use duncan3dc\Speaker\Exception;
 use GuzzleHttp\Client;
 
 /**
- * Convert a string of a text to a spoken word mp3.
+ * Convert a string of a text to spoken word audio.
  */
 abstract class AbstractProvider implements ProviderInterface
 {
@@ -42,6 +42,17 @@ abstract class AbstractProvider implements ProviderInterface
         }
 
         return $this->client;
+    }
+
+
+    /**
+     * Get the format of this audio.
+     *
+     * @return string
+     */
+    public function getFormat()
+    {
+        return "mp3";
     }
 
 

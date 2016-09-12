@@ -3,10 +3,17 @@
 namespace duncan3dc\Speaker\Providers;
 
 /**
- * Convert a string of a text to a spoken word mp3.
+ * Convert a string of a text to spoken word audio.
  */
 interface ProviderInterface
 {
+    /**
+     * Get the format of this audio.
+     *
+     * @return string (mp3/wav)
+     */
+    public function getFormat();
+
     /**
      * Get the current options.
      *
@@ -18,11 +25,11 @@ interface ProviderInterface
     public function getOptions();
 
     /**
-     * Convert the specified text to mp3 audio.
+     * Convert the specified text to audio.
      *
      * @param string $text The text to convert
      *
-     * @return string The mp3 audio data
+     * @return string The audio data
      */
     public function textToSpeech($text);
 }

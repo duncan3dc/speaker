@@ -5,7 +5,7 @@ namespace duncan3dc\Speaker;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 
 /**
- * Convert a string of a text to a spoken word mp3.
+ * Convert a string of a text to spoken word audio.
  */
 class TextToSpeech
 {
@@ -20,7 +20,7 @@ class TextToSpeech
     protected $provider;
 
     /**
-     * @var string $data The mp3 audio.
+     * @var string $data The audio data.
      */
     protected $data;
 
@@ -28,7 +28,7 @@ class TextToSpeech
      * Create a new instance.
      *
      * @param string $text The text to convert
-     * @param Directory $directory The directory to store the mp3 in.
+     * @param Directory $directory The directory to store the audio file in.
      */
     public function __construct($text, ProviderInterface $provider)
     {
@@ -38,9 +38,9 @@ class TextToSpeech
 
 
     /**
-     * Get the mp3 audio for this text.
+     * Get the audio for this text.
      *
-     * @return string The mp3 audio data
+     * @return string The audio data
      */
     public function getAudioData()
     {
@@ -57,7 +57,7 @@ class TextToSpeech
      *
      * @return string
      */
-    protected function generateFilename()
+    public function generateFilename()
     {
         $options = $this->provider->getOptions();
 
@@ -65,12 +65,12 @@ class TextToSpeech
 
         $data = serialize($options);
 
-        return md5($data) . ".mp3";
+        return md5($data) . "." . $this->provider->getFormat();
     }
 
 
     /**
-     * Create an mp3 file on the filesystem.
+     * Create an audio file on the filesystem.
      *
      * @param string $filename The filename to write to
      *
@@ -89,7 +89,7 @@ class TextToSpeech
 
 
     /**
-     * Store the mp3 file on the filesystem.
+     * Store the audio file on the filesystem.
      *
      * This function uses caching so if the file already exists
      * a call to the text-to-speech service is not made.

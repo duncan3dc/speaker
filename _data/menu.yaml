@@ -6,5 +6,6 @@ Getting Started:
 Providers:
   Acapela: /providers/acapela/
   Google: /providers/google/
+  Picotts: /providers/picotts/
   VoiceRSS: /providers/voice-rss/
   Voxygen: /providers/voxygen/
