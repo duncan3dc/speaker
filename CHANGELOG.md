@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.7.1 - 2017-02-05
+
+### Fixed
+
+* [Providers] Fixed a bug with setLanguage() for the Picotts provider.
+
+--------
+
 ## 0.7.0 - 2016-09-12
 
 ### Changed
