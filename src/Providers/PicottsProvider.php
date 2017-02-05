@@ -51,7 +51,7 @@ class PicottsProvider extends AbstractProvider
     public function setLanguage($language)
     {
         if (strlen($language) === 2) {
-			$language = strtolower(trim($language));
+	    $language = strtolower(trim($language));
             $language = "{$language}-" . strtoupper($language);
         }
 
