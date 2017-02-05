@@ -50,13 +50,12 @@ class PicottsProvider extends AbstractProvider
      */
     public function setLanguage($language)
     {
-        $language = strtolower(trim($language));
-
         if (strlen($language) === 2) {
-            $language = "{$language}-{$language}";
+			$language = strtolower(trim($language));
+            $language = "{$language}-" . strtoupper($language);
         }
 
-        if (!preg_match("/^[a-z]{2}-[a-z]{2}$/", $language)) {
+        if (!preg_match("/^[a-z]{2}-[A-Z]{2}$/", $language)) {
             throw new \InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
         }
 
