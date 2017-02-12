@@ -105,7 +105,7 @@ class PicottsProvider extends AbstractProvider
         $cmd = escapeshellcmd($this->pico);
         $cmd .= " --wave=" . escapeshellarg($filename);
         $cmd .= " --lang=" . escapeshellarg($this->language);
-        $cmd .= " " . escapeshellarg($text);
+        $cmd .= " '" . str_replace("'", "'\\''", $text) . "'";
 
         exec($cmd, $output, $return);
 
