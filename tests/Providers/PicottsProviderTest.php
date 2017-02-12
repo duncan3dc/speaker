@@ -107,4 +107,22 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($options, $provider->getOptions());
     }
+
+
+    public function testAccentCharacters()
+    {
+        $provider = new PicottsProvider;
+
+        $result = null;
+        Handlers::handle("exec", function ($command, &$output = [], $return = 0) use (&$result) {
+            $result = $command;
+
+            preg_match("/\-\-wave='([a-z_\/\.]+)'/", $command, $matches);
+            $filename = $matches[1];
+            file_put_contents($filename, "test");
+        });
+
+        $provider->textToSpeech("Bonjour, où est la maison?");
+        $this->assertSame(" 'Bonjour, où est la maison?'", mb_substr($result, -29));
+    }
 }
