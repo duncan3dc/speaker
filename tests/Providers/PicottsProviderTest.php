@@ -4,6 +4,8 @@ namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Exception;
 use duncan3dc\Speaker\Providers\PicottsProvider;
+use Mockery;
+use Symfony\Component\Process\ProcessBuilder;
 
 class PicottsProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,7 +52,26 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
             file_put_contents($filename, "test");
         });
 
-        $this->assertSame("test", $provider->textToSpeech("Hello"));
+        $process = Mockery::mock(ProcessBuilder::class);
+
+        # Get the specified filename and write some test data to it
+        $process->shouldReceive("add")->with(Mockery::on(function ($option) {
+            if (substr($option, 0, 7) === "--wave=") {
+                $filename = substr($option, 7);
+                file_put_contents($filename, "test-data");
+                return true;
+            }
+            return false;
+        }))->andReturn($process);
+
+        $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
+        $process->shouldReceive("add")->with("--lang=en-US")->andReturn($process);
+        $process->shouldReceive("add")->with("Hello")->andReturn($process);
+        $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
+        $process->shouldReceive("run")->withNoArgs();
+
+        $result = $provider->textToSpeech("Hello", $process);
+        $this->assertSame("test-data", $result);
     }
 
 
