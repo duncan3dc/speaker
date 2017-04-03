@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 0.7.3 - 2017-04-07
+
+### Fixed
+
+* [Providers] Don't use a forward slash in the client name.
+
+--------
+
 ## 0.7.2 - 2017-03-01
 
 ### Fixed

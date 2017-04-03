@@ -74,7 +74,7 @@ class GoogleProvider extends AbstractProvider
         return $this->sendRequest("http://translate.google.com/translate_tts", [
             "q"         =>  $text,
             "tl"        =>  $this->language,
-            "client"    =>  "duncan3dc/speaker",
+            "client"    =>  "duncan3dc-speaker",
         ]);
     }
 }
