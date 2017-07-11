@@ -44,14 +44,6 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testTextToSpeech()
     {
-        $provider = new PicottsProvider;
-
-        Handlers::handle("exec", function ($command, &$output = [], $return = 0) {
-            preg_match("/\-\-wave='([a-z_\/\.]+)'/", $command, $matches);
-            $filename = $matches[1];
-            file_put_contents($filename, "test");
-        });
-
         $process = Mockery::mock(ProcessBuilder::class);
 
         # Get the specified filename and write some test data to it
@@ -68,10 +60,63 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
         $process->shouldReceive("add")->with("--lang=en-US")->andReturn($process);
         $process->shouldReceive("add")->with("Hello")->andReturn($process);
         $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
-        $process->shouldReceive("run")->withNoArgs();
+        $process->shouldReceive("run")->withNoArgs()->andReturn(0);
+        $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
 
+        $provider = new PicottsProvider;
         $result = $provider->textToSpeech("Hello", $process);
         $this->assertSame("test-data", $result);
+    }
+
+
+    public function testTextToSpeechUnknownLanguage()
+    {
+        $process = Mockery::mock(ProcessBuilder::class);
+
+        # Get the specified filename and write some test data to it
+        $process->shouldReceive("add")->with(Mockery::on(function ($option) {
+            if (substr($option, 0, 7) === "--wave=") {
+                $filename = substr($option, 7);
+                file_put_contents($filename, "test-data");
+                return true;
+            }
+            return false;
+        }))->andReturn($process);
+
+        $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
+        $process->shouldReceive("add")->with("--lang=zh-CN")->andReturn($process);
+        $process->shouldReceive("add")->with("Hello")->andReturn($process);
+        $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
+        $process->shouldReceive("run")->withNoArgs()->andReturn(1);
+        $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(false);
+        $process->shouldReceive("getErrorOutput")->withNoArgs()->andReturn("Unknown language: zh-CN\nextra boring stuff");
+
+        $provider = new PicottsProvider;
+        $provider->setLanguage("zh-CN");
+
+        $this->setExpectedException(Exception::class, "Unknown language: zh-CN");
+        $provider->textToSpeech("Hello", $process);
+    }
+
+
+    public function testTextToSpeechError()
+    {
+        $process = Mockery::mock(ProcessBuilder::class);
+
+        $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
+        $process->shouldReceive("add")->with(Mockery::on(function ($option) {
+            return (substr($option, 0, 7) === "--wave=");
+        }))->andReturn($process);
+        $process->shouldReceive("add")->with("--lang=en-US")->andReturn($process);
+        $process->shouldReceive("add")->with("Hello")->andReturn($process);
+        $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
+        $process->shouldReceive("run")->withNoArgs()->andReturn(0);
+        $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
+
+        $provider = new PicottsProvider;
+
+        $this->setExpectedException(Exception::class, "TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
+        $provider->textToSpeech("Hello", $process);
     }
 
 

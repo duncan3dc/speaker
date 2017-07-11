@@ -99,21 +99,31 @@ class PicottsProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text, ProcessBuilder $process = null)
+    public function textToSpeech($text, ProcessBuilder $builder = null)
     {
         $filename = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "speaker_picotts.wav";
 
-        if ($process === null) {
-            $process = new ProcessBuilder;
+        if (file_exists($filename)) {
+            unlink($filename);
         }
 
-        $process
+        if ($builder === null) {
+            $builder = new ProcessBuilder;
+        }
+
+        $process = $builder
             ->setPrefix($this->pico)
             ->add("--wave={$filename}")
             ->add("--lang={$this->language}")
-            ->add($text)
-            ->getProcess()
-            ->run();
+            ->add($text);
+
+        $process = $builder->getProcess();
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            $output = $process->getErrorOutput();
+            throw new Exception(explode("\n", $output)[0]);
+        }
 
         if (!file_exists($filename)) {
             throw new Exception("TextToSpeech unable to create file: {$filename}");
