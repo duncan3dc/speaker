@@ -7,7 +7,7 @@ use duncan3dc\Speaker\Providers\ProviderInterface;
 /**
  * Convert a string of a text to spoken word audio.
  */
-class TextToSpeech
+class TextToSpeech implements TextToSpeechInterface
 {
     /**
      * @var string $text The text to convert.
@@ -76,7 +76,7 @@ class TextToSpeech
      *
      * @return $this
      */
-    public function save(string $filename): self
+    public function save(string $filename): TextToSpeechInterface
     {
         $result = file_put_contents($filename, $this->getAudioData());
 
