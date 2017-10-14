@@ -12,17 +12,17 @@ class TextToSpeech
     /**
      * @var string $text The text to convert.
      */
-    protected $text;
+    private $text;
 
     /**
      * @var ProviderInterface $provider The provider instance to handle text conversion.
      */
-    protected $provider;
+    private $provider;
 
     /**
      * @var string $data The audio data.
      */
-    protected $data;
+    private $data;
 
     /**
      * Create a new instance.

@@ -9,8 +9,8 @@ use Mockery;
 
 class AbstractProviderTest extends \PHPUnit_Framework_TestCase
 {
-    protected $client;
-    protected $provider;
+    private $client;
+    private $provider;
 
     public function setUp()
     {

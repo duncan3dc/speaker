@@ -13,7 +13,7 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * @var Client $client A guzzle instance for http requests.
      */
-    protected $client;
+    private $client;
 
     /**
      * Get the guzzle client instance to use.

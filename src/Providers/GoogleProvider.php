@@ -10,7 +10,7 @@ class GoogleProvider extends AbstractProvider
     /**
      * @var string $language The language to use.
      */
-    protected $language = "en";
+    private $language = "en";
 
     /**
      * Create a new instance.

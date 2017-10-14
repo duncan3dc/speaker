@@ -9,7 +9,7 @@ use Mockery;
 
 class GoogleProviderTest extends \PHPUnit_Framework_TestCase
 {
-    protected $client;
+    private $client;
 
     public function setUp()
     {

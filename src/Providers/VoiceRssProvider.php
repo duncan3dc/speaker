@@ -12,12 +12,12 @@ class VoiceRssProvider extends AbstractProvider
     /**
      * @var string $language The language to use.
      */
-    protected $language = "en-gb";
+    private $language = "en-gb";
 
     /**
      * @var int $speed The speech rate.
      */
-    protected $speed = 0;
+    private $speed = 0;
 
     /**
      * Create a new instance.

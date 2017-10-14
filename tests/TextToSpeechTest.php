@@ -9,8 +9,8 @@ use Mockery;
 
 class TextToSpeechTest extends \PHPUnit_Framework_TestCase
 {
-    protected $provider;
-    protected $tts;
+    private $provider;
+    private $tts;
 
     public function setUp()
     {

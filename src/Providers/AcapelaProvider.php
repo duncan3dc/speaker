@@ -10,27 +10,27 @@ class AcapelaProvider extends AbstractProvider
     /**
      * @var string $login Your acapela login.
      */
-    protected $login = "";
+    private $login = "";
 
     /**
      * @var string $application Your acapela application.
      */
-    protected $application = "";
+    private $application = "";
 
     /**
      * @var string $password Your acapela password.
      */
-    protected $password = "";
+    private $password = "";
 
     /**
      * @var string $voice The voice to use.
      */
-    protected $voice = "rod";
+    private $voice = "rod";
 
     /**
      * @var int $speed The speech rate.
      */
-    protected $speed = 180;
+    private $speed = 180;
 
 
     /**
