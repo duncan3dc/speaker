@@ -10,14 +10,12 @@ matrix:
   allow_failures:
   - php: nightly
 
-sudo: false
-
 env:
   - COMPOSER_OPTS=""
   - COMPOSER_OPTS="--prefer-lowest"
 
 install:
-  - composer self-update
+  - composer self-update --snapshot
   - composer update $COMPOSER_OPTS
 
 before_script:
@@ -32,3 +30,6 @@ after_success:
 
 git:
   depth: 5
+
+dist: trusty
+sudo: false
