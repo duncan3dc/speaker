@@ -3,7 +3,7 @@
 namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Exception;
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
 use Mockery;
 
@@ -14,7 +14,7 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = Mockery::mock(Client::class);
+        $this->client = Mockery::mock(ClientInterface::class);
         $this->provider = new ExampleProvider;
         $this->provider->setClient($this->client);
     }
@@ -41,7 +41,7 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
     public function testGetClient()
     {
         $provider = new ExampleProvider;
-        $this->assertInstanceOf(Client::class, $provider->getClient());
+        $this->assertInstanceOf(ClientInterface::class, $provider->getClient());
     }
 
 

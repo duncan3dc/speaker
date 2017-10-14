@@ -3,7 +3,7 @@
 namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Providers\GoogleProvider;
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
 use Mockery;
 
@@ -13,7 +13,7 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = Mockery::mock(Client::class);
+        $this->client = Mockery::mock(ClientInterface::class);
     }
 
 

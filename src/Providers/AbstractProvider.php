@@ -11,18 +11,18 @@ use GuzzleHttp\Client;
 abstract class AbstractProvider implements ProviderInterface
 {
     /**
-     * @var Client $client A guzzle instance for http requests.
+     * @var ClientInterface $client A guzzle instance for http requests.
      */
     private $client;
 
     /**
      * Get the guzzle client instance to use.
      *
-     * @param Client $client
+     * @param ClientInterface $client
      *
      * @return static
      */
-    public function setClient(Client $client)
+    public function setClient(ClientInterface $client)
     {
         $this->client = $client;
 
@@ -33,7 +33,7 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * Get the guzzle client.
      *
-     * @return Client
+     * @return ClientInterface
      */
     public function getClient()
     {
