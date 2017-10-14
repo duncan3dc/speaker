@@ -15,13 +15,13 @@ class Handlers
     }
 
 
-    public static function handle($name, callable $handler)
+    public static function handle(string $name, callable $handler)
     {
         self::$handlers[$name] = $handler;
     }
 
 
-    public static function call($name, ...$arguments)
+    public static function call(string $name, ...$arguments)
     {
         if (array_key_exists($name, self::$handlers)) {
             $function = self::$handlers[$name];

@@ -36,9 +36,13 @@ class AcapelaProvider extends AbstractProvider
     /**
      * Create a new instance.
      *
-     * @param string $voice The voice to use.
+     * @param string $login The username to access the service
+     * @param string $application The name of the application
+     * @param string $password The password to access the service
+     * @param string $voice The voice to use
+     * @param int $speed The speech rate
      */
-    public function __construct($login, $application, $password, $voice = null, $speed = null)
+    public function __construct(string $login, string $application, string $password, string $voice = null, int $speed = null)
     {
         $this->login = $login;
         $this->application = $application;
@@ -61,9 +65,9 @@ class AcapelaProvider extends AbstractProvider
      *
      * @param string $voice The voice to use (eg 'Graham')
      *
-     * @return static
+     * @return $this
      */
-    public function setVoice($voice)
+    public function setVoice(string $voice): self
     {
         $voice = trim($voice);
         if (strlen($voice) < 3) {
@@ -81,9 +85,9 @@ class AcapelaProvider extends AbstractProvider
      *
      * @param int $speed The speech rate to use (between 60 and 360)
      *
-     * @return static
+     * @return $this
      */
-    public function setSpeed($speed)
+    public function setSpeed(int $speed): self
     {
         $speed = (int) $speed;
         if ($speed < 60 || $speed > 360) {
@@ -102,7 +106,7 @@ class AcapelaProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "voice" =>  $this->voice,
@@ -118,7 +122,7 @@ class AcapelaProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech(string $text): string
     {
         if (strlen($text) > 300) {
             throw new \InvalidArgumentException("Only messages under 300 characters are supported");

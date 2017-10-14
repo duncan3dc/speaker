@@ -30,7 +30,7 @@ class TextToSpeech
      * @param string $text The text to convert
      * @param Directory $directory The directory to store the audio file in.
      */
-    public function __construct($text, ProviderInterface $provider)
+    public function __construct(string $text, ProviderInterface $provider)
     {
         $this->text = $text;
         $this->provider = $provider;
@@ -42,7 +42,7 @@ class TextToSpeech
      *
      * @return string The audio data
      */
-    public function getAudioData()
+    public function getAudioData(): string
     {
         if ($this->data === null) {
             $this->data = $this->provider->textToSpeech($this->text);
@@ -57,7 +57,7 @@ class TextToSpeech
      *
      * @return string
      */
-    public function generateFilename()
+    public function generateFilename(): string
     {
         $options = $this->provider->getOptions();
 
@@ -74,9 +74,9 @@ class TextToSpeech
      *
      * @param string $filename The filename to write to
      *
-     * @return static
+     * @return $this
      */
-    public function save($filename)
+    public function save(string $filename): self
     {
         $result = file_put_contents($filename, $this->getAudioData());
 
@@ -98,7 +98,7 @@ class TextToSpeech
      *
      * @return string The full path and filename
      */
-    public function getFile($path = null)
+    public function getFile(string $path = null): string
     {
         if ($path === null) {
             $path = sys_get_temp_dir();

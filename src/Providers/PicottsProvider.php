@@ -27,7 +27,7 @@ class PicottsProvider extends AbstractProvider
      *
      * @param string $language The language to use
      */
-    public function __construct($language = null)
+    public function __construct(string $language = null)
     {
         $pico = trim(exec("which pico2wave"));
         if (!file_exists($pico)) {
@@ -47,9 +47,9 @@ class PicottsProvider extends AbstractProvider
      *
      * @param string $language The language to use (eg 'en')
      *
-     * @return static
+     * @return $this
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language): self
     {
         $language = trim($language);
 
@@ -73,7 +73,7 @@ class PicottsProvider extends AbstractProvider
      *
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return "wav";
     }
@@ -84,7 +84,7 @@ class PicottsProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "language"  =>  $this->language,
@@ -99,7 +99,7 @@ class PicottsProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text, ProcessBuilder $builder = null)
+    public function textToSpeech(string $text, ProcessBuilder $builder = null): string
     {
         $filename = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "speaker_picotts.wav";
 

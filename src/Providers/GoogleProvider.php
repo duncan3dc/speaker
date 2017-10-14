@@ -17,7 +17,7 @@ class GoogleProvider extends AbstractProvider
      *
      * @param string $language The language to use.
      */
-    public function __construct($language = null)
+    public function __construct(string $language = null)
     {
         if ($language !== null) {
             $this->setLanguage($language);
@@ -30,9 +30,9 @@ class GoogleProvider extends AbstractProvider
      *
      * @param string $language The language to use (eg 'en')
      *
-     * @return static
+     * @return $this
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language): self
     {
         $language = trim($language);
         if (strlen($language) !== 2) {
@@ -50,7 +50,7 @@ class GoogleProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "language"  =>  $this->language,
@@ -65,7 +65,7 @@ class GoogleProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech(string $text): string
     {
         if (strlen($text) > 100) {
             throw new \InvalidArgumentException("Only messages under 100 characters are supported");

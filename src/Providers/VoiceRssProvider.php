@@ -24,9 +24,9 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @param string $api Your Voice RSS API key.
      * @param string $language The language to use.
-     * @param string $speed The speech rate to use.
+     * @param int $speed The speech rate to use.
      */
-    public function __construct($apikey, $language = null, $speed = null)
+    public function __construct(string $apikey, string $language = null, int $speed = null)
     {
         $this->apikey = $apikey;
 
@@ -45,9 +45,9 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @param string $language The language to use (eg 'en')
      *
-     * @return static
+     * @return $this
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language): self
     {
         $language = strtolower(trim($language));
 
@@ -70,9 +70,9 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @param int $speed The speech rate to use (between -10 and 10)
      *
-     * @return static
+     * @return $this
      */
-    public function setSpeed($speed)
+    public function setSpeed(int $speed): self
     {
         $speed = (int) $speed;
         if ($speed < -10 || $speed > 10) {
@@ -90,7 +90,7 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             "language"  =>  $this->language,
@@ -106,7 +106,7 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @return string The audio data
      */
-    public function textToSpeech($text)
+    public function textToSpeech(string $text): string
     {
         $result = $this->sendRequest("https://api.voicerss.org/", [
             "key"   =>  $this->apikey,

@@ -12,7 +12,7 @@ interface ProviderInterface
      *
      * @return string (mp3/wav)
      */
-    public function getFormat();
+    public function getFormat(): string;
 
     /**
      * Get the current options.
@@ -22,7 +22,7 @@ interface ProviderInterface
      *
      * @return array
      */
-    public function getOptions();
+    public function getOptions(): array;
 
     /**
      * Convert the specified text to audio.
@@ -31,5 +31,5 @@ interface ProviderInterface
      *
      * @return string The audio data
      */
-    public function textToSpeech($text);
+    public function textToSpeech(string $text): string;
 }
