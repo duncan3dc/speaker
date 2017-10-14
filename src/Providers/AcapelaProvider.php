@@ -2,6 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+
 /**
  * Convert a string of a text to spoken word audio.
  */
@@ -71,7 +73,7 @@ class AcapelaProvider extends AbstractProvider
     {
         $voice = trim($voice);
         if (strlen($voice) < 3) {
-            throw new \InvalidArgumentException("Unexpected voice name ({$voice}), names should be at least 3 characters long");
+            throw new InvalidArgumentException("Unexpected voice name ({$voice}), names should be at least 3 characters long");
         }
 
         $this->voice = strtolower($voice);
@@ -91,7 +93,7 @@ class AcapelaProvider extends AbstractProvider
     {
         $speed = (int) $speed;
         if ($speed < 60 || $speed > 360) {
-            throw new \InvalidArgumentException("Invalid speed ({$speed}), must be a number between 60 and 360");
+            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between 60 and 360");
         }
 
         $this->speed = $speed;
@@ -125,7 +127,7 @@ class AcapelaProvider extends AbstractProvider
     public function textToSpeech(string $text): string
     {
         if (strlen($text) > 300) {
-            throw new \InvalidArgumentException("Only messages under 300 characters are supported");
+            throw new InvalidArgumentException("Only messages under 300 characters are supported");
         }
 
         return $this->sendRequest("http://vaas.acapela-group.com/Services/FileMaker.mp3", [

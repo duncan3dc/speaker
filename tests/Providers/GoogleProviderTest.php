@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
@@ -66,7 +67,7 @@ class GoogleProviderTest extends TestCase
     {
         $provider = new GoogleProvider;
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
         $provider->setLanguage("nope");
     }
@@ -88,7 +89,7 @@ class GoogleProviderTest extends TestCase
     {
         $provider = new GoogleProvider;
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Only messages under 100 characters are supported");
         $provider->textToSpeech("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan laoreet sapien, eget posuere");
     }

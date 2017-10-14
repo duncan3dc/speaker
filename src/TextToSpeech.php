@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Speaker;
 
+use duncan3dc\Speaker\Exceptions\RuntimeException;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 
 /**
@@ -81,7 +82,7 @@ class TextToSpeech implements TextToSpeechInterface
         $result = file_put_contents($filename, $this->getAudioData());
 
         if ($result === false) {
-            throw new Exception("Unable to save the file ({$filename})");
+            throw new RuntimeException("Unable to save the file ({$filename})");
         }
 
         return $this;

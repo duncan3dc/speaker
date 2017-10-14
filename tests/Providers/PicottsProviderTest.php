@@ -2,7 +2,8 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 use duncan3dc\Speaker\Providers\PicottsProvider;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -38,7 +39,7 @@ class PicottsProviderTest extends TestCase
             return "";
         });
 
-        $this->expectException(Exception::class);
+        $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unable to find picotts program, please install pico2wave before trying again");
         $provider = new PicottsProvider;
     }
@@ -96,7 +97,7 @@ class PicottsProviderTest extends TestCase
         $provider = new PicottsProvider;
         $provider->setLanguage("zh-CN");
 
-        $this->expectException(Exception::class);
+        $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unknown language: zh-CN");
         $provider->textToSpeech("Hello", $process);
     }
@@ -118,7 +119,7 @@ class PicottsProviderTest extends TestCase
 
         $provider = new PicottsProvider;
 
-        $this->expectException(Exception::class);
+        $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
         $provider->textToSpeech("Hello", $process);
     }
@@ -150,7 +151,7 @@ class PicottsProviderTest extends TestCase
     {
         $provider = new PicottsProvider;
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
         $provider->setLanguage("k");
     }

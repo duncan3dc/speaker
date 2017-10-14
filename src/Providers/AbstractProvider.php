@@ -2,7 +2,7 @@
 
 namespace duncan3dc\Speaker\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
@@ -86,7 +86,7 @@ abstract class AbstractProvider implements ProviderInterface
         $response = $this->getClient()->get($url);
 
         if ($response->getStatusCode() != "200") {
-            throw new Exception("Failed to call the external text-to-speech service");
+            throw new ProviderException("Failed to call the external text-to-speech service");
         }
 
         return $response->getBody();

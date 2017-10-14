@@ -1,10 +1,10 @@
 <?php
 
-namespace duncan3dc\Speaker;
+namespace duncan3dc\Speaker\Exceptions;
 
 /**
  * A custom exception for the speaker library to throw.
  */
-class Exception extends \Exception
+interface Exception
 {
 }

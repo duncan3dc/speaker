@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Providers\AcapelaProvider;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
@@ -66,7 +67,7 @@ class AcapelaProviderTest extends TestCase
     {
         $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected voice name (ke), names should be at least 3 characters long");
         $provider->setVoice("ke");
     }
@@ -96,7 +97,7 @@ class AcapelaProviderTest extends TestCase
     {
         $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (30), must be a number between 60 and 360");
         $provider->setSpeed(30);
     }
@@ -132,7 +133,7 @@ class AcapelaProviderTest extends TestCase
     {
         $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
 
-        $this->expectException("InvalidArgumentException");
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Only messages under 300 characters are supported");
         $provider->textToSpeech(str_repeat("A", 301));
     }

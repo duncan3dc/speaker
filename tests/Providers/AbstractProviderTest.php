@@ -2,7 +2,7 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
 use Mockery;
@@ -71,7 +71,7 @@ class AbstractProviderTest extends TestCase
             ->with("http://example.com/?text=Hello")
             ->andReturn($response);
 
-        $this->expectException(Exception::class);
+        $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Failed to call the external text-to-speech service");
         $this->provider->textToSpeech("Hello");
     }

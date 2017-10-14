@@ -2,6 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+
 /**
  * Convert a string of a text to spoken word audio.
  */
@@ -36,7 +38,7 @@ class GoogleProvider extends AbstractProvider
     {
         $language = trim($language);
         if (strlen($language) !== 2) {
-            throw new \InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters");
+            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters");
         }
 
         $this->language = $language;
@@ -68,7 +70,7 @@ class GoogleProvider extends AbstractProvider
     public function textToSpeech(string $text): string
     {
         if (strlen($text) > 100) {
-            throw new \InvalidArgumentException("Only messages under 100 characters are supported");
+            throw new InvalidArgumentException("Only messages under 100 characters are supported");
         }
 
         return $this->sendRequest("http://translate.google.com/translate_tts", [

@@ -2,7 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 use duncan3dc\Speaker\Providers\AbstractProvider;
 use Symfony\Component\Process\ProcessBuilder;
 
@@ -31,7 +32,7 @@ class PicottsProvider extends AbstractProvider
     {
         $pico = trim(exec("which pico2wave"));
         if (!file_exists($pico)) {
-            throw new Exception("Unable to find picotts program, please install pico2wave before trying again");
+            throw new ProviderException("Unable to find picotts program, please install pico2wave before trying again");
         }
 
         $this->pico = $pico;
@@ -58,7 +59,7 @@ class PicottsProvider extends AbstractProvider
         }
 
         if (!preg_match("/^[a-z]{2}-[a-z]{2}$/i", $language)) {
-            throw new \InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
+            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
         }
 
         list($main, $sub) = explode("-", $language);
@@ -122,11 +123,11 @@ class PicottsProvider extends AbstractProvider
 
         if (!$process->isSuccessful()) {
             $output = $process->getErrorOutput();
-            throw new Exception(explode("\n", $output)[0]);
+            throw new ProviderException(explode("\n", $output)[0]);
         }
 
         if (!file_exists($filename)) {
-            throw new Exception("TextToSpeech unable to create file: {$filename}");
+            throw new ProviderException("TextToSpeech unable to create file: {$filename}");
         }
 
         $result = file_get_contents($filename);

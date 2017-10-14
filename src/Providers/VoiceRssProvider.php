@@ -2,7 +2,8 @@
 
 namespace duncan3dc\Speaker\Providers;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+use duncan3dc\Speaker\Exceptions\ProviderException;
 
 /**
  * Convert a string of a text to spoken word audio.
@@ -56,7 +57,7 @@ class VoiceRssProvider extends AbstractProvider
         }
 
         if (!preg_match("/^[a-z]{2}-[a-z]{2}$/", $language)) {
-            throw new \InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
+            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
         }
 
         $this->language = $language;
@@ -76,7 +77,7 @@ class VoiceRssProvider extends AbstractProvider
     {
         $speed = (int) $speed;
         if ($speed < -10 || $speed > 10) {
-            throw new \InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
+            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
         }
 
         $this->speed = $speed;
@@ -118,7 +119,7 @@ class VoiceRssProvider extends AbstractProvider
         ]);
 
         if (substr($result, 0, 6) === "ERROR:") {
-            throw new Exception("TextToSpeech {$result}");
+            throw new ProviderException("TextToSpeech {$result}");
         }
 
         return $result;

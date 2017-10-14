@@ -2,7 +2,7 @@
 
 namespace duncan3dc\Speaker\Test;
 
-use duncan3dc\Speaker\Exception;
+use duncan3dc\Speaker\Exceptions\RuntimeException;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech;
 use Mockery;
@@ -82,7 +82,7 @@ class TextToSpeechTest extends TestCase
 
         $path = "/no/such/path/test.mp3";
 
-        $this->expectException(Exception::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage("Unable to save the file ({$path})");
         $this->tts->save($path);
     }
