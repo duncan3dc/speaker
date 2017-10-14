@@ -15,24 +15,24 @@ $provider = new AcapelaProvider("EVAL_VAAS", "EVAL_2643150", "y6r2fjul");
 
 ## Voices
 
-The voice used can be set via the constructor or the `setVoice()` method:
+The voice used can be set via the constructor or the `withVoice()` method:
 
 ~~~php
 $provider = new AcapelaProvider("EVAL_VAAS", "EVAL_2643150", "y6r2fjul", "Graham");
 
-$provider->setVoice("Peter");
+$provider = $provider->withVoice("Peter");
 ~~~
 
 There is a [list of voices](http://www.acapela-vaas.com/ReleasedDocumentation/voices_list.php) available from Acapela.
 
 ## Speed
 
-The speed that the text is read can be set via the constructor or the `setSpeed()` method:
+The speed that the text is read can be set via the constructor or the `withSpeed()` method:
 
 ~~~php
 $provider = new AcapelaProvider("EVAL_VAAS", "EVAL_2643150", "y6r2fjul", 200);
 
-$provider->setSpeed(360);
+$provider = $provider->withSpeed(360);
 ~~~
 
 The speed is an integer between 60 and 360

@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">22</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">22</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,37 +144,58 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-516361671"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-930381697"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-516361671" class="accordion-body collapse in">
+            <div id="namespace-930381697" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-319454180"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1570406003"></a>
                                 <a href="../namespaces/duncan3dc.html" style="margin-left: 30px; padding-left: 0">duncan3dc</a>
             </div>
-            <div id="namespace-319454180" class="accordion-body collapse ">
+            <div id="namespace-1570406003" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-468790272"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-198217725"></a>
                                 <a href="../namespaces/duncan3dc.Speaker.html" style="margin-left: 30px; padding-left: 0">Speaker</a>
             </div>
-            <div id="namespace-468790272" class="accordion-body collapse ">
+            <div id="namespace-198217725" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-377796370"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1531037960"></a>
+                                <a href="../namespaces/duncan3dc.Speaker.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
+            </div>
+            <div id="namespace-1531037960" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/duncan3dc.Speaker.Exceptions.Exception.html">Exception</a></li>
+                                                                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exceptions.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exceptions.ProviderException.html">ProviderException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exceptions.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-469904490"></a>
                                 <a href="../namespaces/duncan3dc.Speaker.Providers.html" style="margin-left: 30px; padding-left: 0">Providers</a>
             </div>
-            <div id="namespace-377796370" class="accordion-body collapse ">
+            <div id="namespace-469904490" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -184,8 +205,8 @@
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html">AcapelaProvider</a></li>
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.GoogleProvider.html">GoogleProvider</a></li>
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.PicottsProvider.html">PicottsProvider</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.ResponsiveVoiceProvider.html">ResponsiveVoiceProvider</a></li>
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.VoiceRssProvider.html">VoiceRssProvider</a></li>
-                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.VoxygenProvider.html">VoxygenProvider</a></li>
                                             </ul>
                 </div>
             </div>
@@ -194,8 +215,8 @@
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exception.html">Exception</a></li>
-                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.TextToSpeech.html">TextToSpeech</a></li>
+                                                    <li class="interface"><a href="../classes/duncan3dc.Speaker.TextToSpeechInterface.html">TextToSpeechInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.TextToSpeech.html">TextToSpeech</a></li>
                                             </ul>
                 </div>
             </div>
@@ -254,8 +275,8 @@
                                                                     <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#method_getFormat" class="">getFormat()</a><br />
                                                                     <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_getOptions" class="">getOptions()</a><br />
                                                                     <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method___construct" class="">__construct()</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_setVoice" class="">setVoice()</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_setSpeed" class="">setSpeed()</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_withVoice" class="">withVoice()</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_withSpeed" class="">withSpeed()</a><br />
                                                                     <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_textToSpeech" class="">textToSpeech()</a><br />
                                                             </section>
                             <section class="span4">
@@ -270,12 +291,7 @@
                                                                     <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#method_sendRequest" class="">sendRequest()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#property_client" class="">$client</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_login" class="">$login</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_application" class="">$application</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_password" class="">$password</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_voice" class="">$voice</a><br />
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_speed" class="">$speed</a><br />
+                                                                    <em>No protected properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -283,10 +299,16 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_getVoice" class="">getVoice()</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#method_getSpeed" class="">getSpeed()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No private properties found</em>
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#property_client" class="">$client</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_login" class="">$login</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_application" class="">$application</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_password" class="">$password</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_voice" class="">$voice</a><br />
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html#property_speed" class="">$speed</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -312,7 +334,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -330,17 +352,17 @@
                 <aside class="span4 detailsbar"></aside>
             </div>
 
-                                                    <div class="row-fluid">
+                                                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="property_client" name="property_client" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$client</h3>
-                <pre class="signature">$client : \GuzzleHttp\Client</pre>
+                <h3 class="private ">$client</h3>
+                <pre class="signature">$client : \GuzzleHttp\ClientInterface</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
-                \GuzzleHttp\Client
+                \GuzzleHttp\ClientInterface
                 &mdash; A guzzle instance for http requests.                            </article>
         </div>
         <aside class="span4 detailsbar">
@@ -360,7 +382,7 @@
         <div class="span8 content class">
             <a id="property_login" name="property_login" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$login</h3>
+                <h3 class="private ">$login</h3>
                 <pre class="signature">$login : string</pre>
                 <p><em></em></p>
                 
@@ -384,7 +406,7 @@
         <div class="span8 content class">
             <a id="property_application" name="property_application" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$application</h3>
+                <h3 class="private ">$application</h3>
                 <pre class="signature">$application : string</pre>
                 <p><em></em></p>
                 
@@ -408,7 +430,7 @@
         <div class="span8 content class">
             <a id="property_password" name="property_password" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$password</h3>
+                <h3 class="private ">$password</h3>
                 <pre class="signature">$password : string</pre>
                 <p><em></em></p>
                 
@@ -432,7 +454,7 @@
         <div class="span8 content class">
             <a id="property_voice" name="property_voice" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$voice</h3>
+                <h3 class="private ">$voice</h3>
                 <pre class="signature">$voice : string</pre>
                 <p><em></em></p>
                 
@@ -456,7 +478,7 @@
         <div class="span8 content class">
             <a id="property_speed" name="property_speed" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$speed</h3>
+                <h3 class="private ">$speed</h3>
                 <pre class="signature">$speed : integer</pre>
                 <p><em></em></p>
                 
@@ -476,7 +498,7 @@
         </aside>
     </div>
 
-                                            
+                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -489,14 +511,14 @@
             <article class="method">
                 <h3 class="public ">setClient()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setClient(\GuzzleHttp\Client  <span class="argument">$client</span>) : static</pre>
+                <pre class="signature" style="margin-right: 54px;">setClient(\GuzzleHttp\ClientInterface  <span class="argument">$client</span>) : \duncan3dc\Speaker\Providers\ProviderInterface</pre>
                 <p><em>Get the guzzle client instance to use.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\GuzzleHttp\Client</td>
+                                <td>\GuzzleHttp\ClientInterface</td>
                                 <td>$client </td>
                                 <td></td>
                             </tr>
@@ -504,8 +526,8 @@
                 
                 
                                     <h4>Returns</h4>
-                    static
-                                    				
+                    <a href="../classes/duncan3dc.Speaker.Providers.ProviderInterface.html">\duncan3dc\Speaker\Providers\ProviderInterface</a>
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -527,15 +549,15 @@
             <article class="method">
                 <h3 class="public ">getClient()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getClient() : \GuzzleHttp\Client</pre>
+                <pre class="signature" style="margin-right: 54px;">getClient() : \GuzzleHttp\ClientInterface</pre>
                 <p><em>Get the guzzle client.</em></p>
                 
 
                 
                 
                                     <h4>Returns</h4>
-                    \GuzzleHttp\Client
-                                    				
+                    \GuzzleHttp\ClientInterface
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -565,7 +587,7 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -596,13 +618,15 @@ with these options before and can use the previous result.</p>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -616,47 +640,49 @@ with these options before and can use the previous result.</p>
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$login</span>,   <span class="argument">$application</span>,   <span class="argument">$password</span>, string  <span class="argument">$voice = null</span>,   <span class="argument">$speed = null</span>) </pre>
+                <pre class="signature" style="margin-right: 54px;">__construct(string  <span class="argument">$login</span>, string  <span class="argument">$application</span>, string  <span class="argument">$password</span>, string  <span class="argument">$voice = null</span>, integer  <span class="argument">$speed = null</span>) </pre>
                 <p><em>Create a new instance.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$login </td>
-                                <td></td>
+                                <td><p>The username to access the service</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$application </td>
-                                <td></td>
+                                <td><p>The name of the application</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$password </td>
-                                <td></td>
+                                <td><p>The password to access the service</p></td>
                             </tr>
                                                     <tr>
                                 <td>string</td>
                                 <td>$voice </td>
-                                <td><p>The voice to use.</p></td>
+                                <td><p>The voice to use</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>integer</td>
                                 <td>$speed </td>
-                                <td></td>
+                                <td><p>The speech rate</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -666,11 +692,11 @@ with these options before and can use the previous result.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_setVoice" name="method_setVoice" class="anchor"></a>
+            <a id="method_withVoice" name="method_withVoice" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">setVoice()</h3>
+                <h3 class="public ">withVoice()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setVoice(string  <span class="argument">$voice</span>) : static</pre>
+                <pre class="signature" style="margin-right: 54px;">withVoice(string  <span class="argument">$voice</span>) : self</pre>
                 <p><em>Set the voice to use.</em></p>
                 <p>Visit <a href="http://www.acapela-vaas.com/ReleasedDocumentation/voices_list.php">http://www.acapela-vaas.com/ReleasedDocumentation/voices_list.php</a> for available voices</p>
 
@@ -685,14 +711,16 @@ with these options before and can use the previous result.</p>
                 
                 
                                     <h4>Returns</h4>
-                    static
-                                    				
+                    self
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -702,11 +730,11 @@ with these options before and can use the previous result.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_setSpeed" name="method_setSpeed" class="anchor"></a>
+            <a id="method_withSpeed" name="method_withSpeed" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">setSpeed()</h3>
+                <h3 class="public ">withSpeed()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setSpeed(integer  <span class="argument">$speed</span>) : static</pre>
+                <pre class="signature" style="margin-right: 54px;">withSpeed(integer  <span class="argument">$speed</span>) : self</pre>
                 <p><em>Set the speech rate to use.</em></p>
                 
 
@@ -721,14 +749,16 @@ with these options before and can use the previous result.</p>
                 
                 
                                     <h4>Returns</h4>
-                    static
-                                    				
+                    self
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -759,13 +789,15 @@ with these options before and can use the previous result.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The audio data</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -801,7 +833,7 @@ with these options before and can use the previous result.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The response body</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -817,7 +849,83 @@ with these options before and can use the previous result.</p>
         </aside>
     </div>
 
-                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getVoice" name="method_getVoice" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">getVoice()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getVoice(string  <span class="argument">$voice</span>) : string</pre>
+                <p><em>Check if the voce is valid, and convert it to the required format.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$voice </td>
+                                <td><p>The voice to use</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSpeed" name="method_getSpeed" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">getSpeed()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSpeed(integer  <span class="argument">$speed</span>) : integer</pre>
+                <p><em>Check the speech rate is valid.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$speed </td>
+                                <td><p>The speech rate to use</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AcapelaProvider</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -867,7 +975,7 @@ with these options before and can use the previous result.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 12th, 2016 at 19:44.
+                    on October 14th, 2017 at 18:25.
                 </section>
             </section>
         </section>

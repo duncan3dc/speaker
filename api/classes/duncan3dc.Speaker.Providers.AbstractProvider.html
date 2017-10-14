@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">22</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">22</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,37 +144,58 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-326650628"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-211019578"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-326650628" class="accordion-body collapse in">
+            <div id="namespace-211019578" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-203075684"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-402666323"></a>
                                 <a href="../namespaces/duncan3dc.html" style="margin-left: 30px; padding-left: 0">duncan3dc</a>
             </div>
-            <div id="namespace-203075684" class="accordion-body collapse ">
+            <div id="namespace-402666323" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2018928462"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-131114296"></a>
                                 <a href="../namespaces/duncan3dc.Speaker.html" style="margin-left: 30px; padding-left: 0">Speaker</a>
             </div>
-            <div id="namespace-2018928462" class="accordion-body collapse ">
+            <div id="namespace-131114296" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1714739029"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-543245299"></a>
+                                <a href="../namespaces/duncan3dc.Speaker.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
+            </div>
+            <div id="namespace-543245299" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/duncan3dc.Speaker.Exceptions.Exception.html">Exception</a></li>
+                                                                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exceptions.InvalidArgumentException.html">InvalidArgumentException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exceptions.ProviderException.html">ProviderException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exceptions.RuntimeException.html">RuntimeException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1177852075"></a>
                                 <a href="../namespaces/duncan3dc.Speaker.Providers.html" style="margin-left: 30px; padding-left: 0">Providers</a>
             </div>
-            <div id="namespace-1714739029" class="accordion-body collapse ">
+            <div id="namespace-1177852075" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -184,8 +205,8 @@
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.AcapelaProvider.html">AcapelaProvider</a></li>
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.GoogleProvider.html">GoogleProvider</a></li>
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.PicottsProvider.html">PicottsProvider</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.ResponsiveVoiceProvider.html">ResponsiveVoiceProvider</a></li>
                                                     <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.VoiceRssProvider.html">VoiceRssProvider</a></li>
-                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Providers.VoxygenProvider.html">VoxygenProvider</a></li>
                                             </ul>
                 </div>
             </div>
@@ -194,8 +215,8 @@
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.Exception.html">Exception</a></li>
-                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.TextToSpeech.html">TextToSpeech</a></li>
+                                                    <li class="interface"><a href="../classes/duncan3dc.Speaker.TextToSpeechInterface.html">TextToSpeechInterface</a></li>
+                                                                                                    <li class="class"><a href="../classes/duncan3dc.Speaker.TextToSpeech.html">TextToSpeech</a></li>
                                             </ul>
                 </div>
             </div>
@@ -266,7 +287,7 @@
                                                                     <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#method_sendRequest" class="">sendRequest()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#property_client" class="">$client</a><br />
+                                                                    <em>No protected properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -277,7 +298,7 @@
                                                                     <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No private properties found</em>
+                                                                    <a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html#property_client" class="">$client</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -304,7 +325,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -322,17 +343,17 @@
                 <aside class="span4 detailsbar"></aside>
             </div>
 
-                                                    <div class="row-fluid">
+                                                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="property_client" name="property_client" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$client</h3>
-                <pre class="signature">$client : \GuzzleHttp\Client</pre>
+                <h3 class="private ">$client</h3>
+                <pre class="signature">$client : \GuzzleHttp\ClientInterface</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
-                \GuzzleHttp\Client
+                \GuzzleHttp\ClientInterface
                 &mdash; A guzzle instance for http requests.                            </article>
         </div>
         <aside class="span4 detailsbar">
@@ -346,7 +367,7 @@
         </aside>
     </div>
 
-                                            
+                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -359,14 +380,14 @@
             <article class="method">
                 <h3 class="public ">setClient()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setClient(\GuzzleHttp\Client  <span class="argument">$client</span>) : static</pre>
+                <pre class="signature" style="margin-right: 54px;">setClient(\GuzzleHttp\ClientInterface  <span class="argument">$client</span>) : \duncan3dc\Speaker\Providers\ProviderInterface</pre>
                 <p><em>Get the guzzle client instance to use.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\GuzzleHttp\Client</td>
+                                <td>\GuzzleHttp\ClientInterface</td>
                                 <td>$client </td>
                                 <td></td>
                             </tr>
@@ -374,14 +395,16 @@
                 
                 
                                     <h4>Returns</h4>
-                    static
-                                    				
+                    <a href="../classes/duncan3dc.Speaker.Providers.ProviderInterface.html">\duncan3dc\Speaker\Providers\ProviderInterface</a>
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AbstractProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -395,21 +418,23 @@
             <article class="method">
                 <h3 class="public ">getClient()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getClient() : \GuzzleHttp\Client</pre>
+                <pre class="signature" style="margin-right: 54px;">getClient() : \GuzzleHttp\ClientInterface</pre>
                 <p><em>Get the guzzle client.</em></p>
                 
 
                 
                 
                                     <h4>Returns</h4>
-                    \GuzzleHttp\Client
-                                    				
+                    \GuzzleHttp\ClientInterface
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AbstractProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -431,13 +456,15 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AbstractProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -460,13 +487,15 @@ with these options before and can use the previous result.</p>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AbstractProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -502,13 +531,15 @@ with these options before and can use the previous result.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The response body</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.Speaker.Providers.AbstractProvider.html"><div class="path-wrapper">\duncan3dc\Speaker\Providers\AbstractProvider</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -566,7 +597,7 @@ with these options before and can use the previous result.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 12th, 2016 at 19:44.
+                    on October 14th, 2017 at 18:25.
                 </section>
             </section>
         </section>

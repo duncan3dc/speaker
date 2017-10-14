@@ -7,5 +7,5 @@ Providers:
   Acapela: /providers/acapela/
   Google: /providers/google/
   Picotts: /providers/picotts/
+  ResponsiveVoice: /providers/responsive-voice/
   VoiceRSS: /providers/voice-rss/
-  Voxygen: /providers/voxygen/
