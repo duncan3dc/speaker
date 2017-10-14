@@ -1,5 +1,5 @@
 # speaker
-A PHP library to convert text to speech using various web services
+A PHP library to convert text to speech using various services
 
 Full documentation is available at http://duncan3dc.github.io/speaker/  
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/speaker/api/](http://duncan3dc.github.io/speaker/api/namespaces/duncan3dc.Speaker.html)  
@@ -23,6 +23,7 @@ _Read more at http://duncan3dc.github.io/speaker/_
 * __Acapela__ - _Paid voice as a service_
 * __Google__ - _Unadvertised service with 100 character limit_
 * __Picotts__ - _An offline command line version_
+* __ResponsiveVoice__ - _Unadvertised service running over a javascript engine_
 * __Voice RSS__ - _Free/paid service requires [registration](http://www.voicerss.org/personel/)_
 
 
