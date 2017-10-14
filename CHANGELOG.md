@@ -5,6 +5,28 @@ Changelog
 
 --------
 
+## 1.0.0 - 2017-10-14
+
+### Added
+
+* [Providers] ResponsiveVoice provider.
+* [TextToSpeech] Added a TextToSpeechInterface.
+
+### Changed
+
+* [Support] Added support for PHP 7.
+* [Support] Dropped support for PHP 5.
+* [Support] Dropped support for HHVM.
+* [Providers] Dropped the Voxygen provider as the service is no longer available.
+* [Providers] All providers are now immutable.
+* [Exceptions] All exceptions thrown are now library specific.
+
+### Fixed
+
+* [Providers] Improve the error message for a pico unknown language.
+
+--------
+
 ## 0.7.3 - 2017-04-07
 
 ### Fixed
