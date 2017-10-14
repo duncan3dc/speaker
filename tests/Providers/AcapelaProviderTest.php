@@ -11,11 +11,15 @@ use PHPUnit\Framework\TestCase;
 
 class AcapelaProviderTest extends TestCase
 {
+    private $provider;
     private $client;
 
     public function setUp()
     {
+        $this->provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
+
         $this->client = Mockery::mock(ClientInterface::class);
+        $this->provider->setClient($this->client);
     }
 
 
@@ -27,9 +31,6 @@ class AcapelaProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-        $provider->setClient($this->client);
-
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
@@ -39,16 +40,17 @@ class AcapelaProviderTest extends TestCase
             ->with("http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=rod22k&req_spd=180&req_text=Hello")
             ->andReturn($response);
 
-        $this->assertSame("mp3", $provider->textToSpeech("Hello"));
+        $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
     }
 
 
-    public function testSetVoice()
+    public function testWithVoice()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-        $provider->setClient($this->client);
+        $provider = $this->provider->withVoice("Peter");
 
-        $provider->setVoice("Peter");
+        # Ensure immutability
+        $this->assertSame("peter", $provider->getOptions()["voice"]);
+        $this->assertSame("rod", $this->provider->getOptions()["voice"]);
 
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -63,22 +65,21 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testSetVoiceFailure()
+    public function testWithVoiceFailure()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected voice name (ke), names should be at least 3 characters long");
-        $provider->setVoice("ke");
+        $this->provider->withVoice("ke");
     }
 
 
-    public function testSetSpeed()
+    public function testWithSpeed()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-        $provider->setClient($this->client);
+        $provider = $this->provider->withSpeed(260);
 
-        $provider->setSpeed(260);
+        # Ensure immutability
+        $this->assertSame(260, $provider->getOptions()["speed"]);
+        $this->assertSame(180, $this->provider->getOptions()["speed"]);
 
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -93,30 +94,34 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testSetSpeedFailure()
+    public function testWithSpeedFailure()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (30), must be a number between 60 and 360");
-        $provider->setSpeed(30);
+        $this->provider->withSpeed(30);
     }
 
 
     public function testGetOptions()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-
         $options = [
             "voice" =>  "rod",
             "speed" =>  180,
         ];
 
-        $this->assertSame($options, $provider->getOptions());
+        $this->assertSame($options, $this->provider->getOptions());
     }
 
 
-    public function testConstructorOptions()
+    public function testSendRequestFailure()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Only messages under 300 characters are supported");
+        $this->provider->textToSpeech(str_repeat("A", 301));
+    }
+
+
+    public function testConstructorOptions1()
     {
         $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "lucy", 190);
 
@@ -127,14 +132,16 @@ class AcapelaProviderTest extends TestCase
 
         $this->assertSame($options, $provider->getOptions());
     }
-
-
-    public function testSendRequestFailure()
+    public function testConstructorOptions2()
     {
-        $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
-
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage("Only messages under 300 characters are supported");
-        $provider->textToSpeech(str_repeat("A", 301));
+        $this->expectExceptionMessage("Unexpected voice name (no), names should be at least 3 characters long");
+        new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "no");
+    }
+    public function testConstructorOptions3()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid speed (50), must be a number between 60 and 360");
+        new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "fred", 50);
     }
 }

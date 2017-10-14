@@ -51,12 +51,30 @@ class AcapelaProvider extends AbstractProvider
         $this->password = $password;
 
         if ($voice !== null) {
-            $this->setVoice($voice);
+            $this->voice = $this->getVoice($voice);
         }
 
         if ($speed !== null) {
-            $this->setSpeed($speed);
+            $this->speed = $this->getSpeed($speed);
         }
+    }
+
+
+    /**
+     * Check if the voce is valid, and convert it to the required format.
+     *
+     * @param string $voice The voice to use
+     *
+     * @return string
+     */
+    private function getVoice(string $voice): string
+    {
+        $voice = trim($voice);
+        if (strlen($voice) < 3) {
+            throw new InvalidArgumentException("Unexpected voice name ({$voice}), names should be at least 3 characters long");
+        }
+
+        return strtolower($voice);
     }
 
 
@@ -67,18 +85,32 @@ class AcapelaProvider extends AbstractProvider
      *
      * @param string $voice The voice to use (eg 'Graham')
      *
-     * @return $this
+     * @return self
      */
-    public function setVoice(string $voice): self
+    public function withVoice(string $voice): self
     {
-        $voice = trim($voice);
-        if (strlen($voice) < 3) {
-            throw new InvalidArgumentException("Unexpected voice name ({$voice}), names should be at least 3 characters long");
+        $provider = clone $this;
+
+        $provider->voice = $this->getVoice($voice);
+
+        return $provider;
+    }
+
+
+    /**
+     * Check the speech rate is valid.
+     *
+     * @param int $speed The speech rate to use
+     *
+     * @return int
+     */
+    private function getSpeed(int $speed): int
+    {
+        if ($speed < 60 || $speed > 360) {
+            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between 60 and 360");
         }
 
-        $this->voice = strtolower($voice);
-
-        return $this;
+        return $speed;
     }
 
 
@@ -87,20 +119,16 @@ class AcapelaProvider extends AbstractProvider
      *
      * @param int $speed The speech rate to use (between 60 and 360)
      *
-     * @return $this
+     * @return self
      */
-    public function setSpeed(int $speed): self
+    public function withSpeed(int $speed): self
     {
-        $speed = (int) $speed;
-        if ($speed < 60 || $speed > 360) {
-            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between 60 and 360");
-        }
+        $provider = clone $this;
 
-        $this->speed = $speed;
+        $provider->speed = $this->getSpeed($speed);
 
-        return $this;
+        return $provider;
     }
-
 
 
     /**

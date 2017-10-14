@@ -44,23 +44,22 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function testSetLanguage()
+    public function testWithLanguage()
     {
-        $this->provider->setLanguage("ru");
+        $provider = $this->provider->withLanguage("ru");
 
-        $options = [
-            "language"  =>  "ru-RU",
-        ];
+        $this->assertSame("ru-RU", $provider->getOptions()["language"]);
 
-        $this->assertSame($options, $this->provider->getOptions());
+        # Ensure immutability
+        $this->assertSame("en-GB", $this->provider->getOptions()["language"]);
     }
 
 
-    public function testSetLanguageFailure()
+    public function testWithLanguageFailure()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
-        $this->provider->setLanguage("k");
+        $this->provider->withLanguage("k");
     }
 
 
@@ -74,14 +73,16 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions()
+    public function testConstructorOptions1()
     {
         $provider = new ResponsiveVoiceProvider("de-de");
 
-        $options = [
-            "language"  =>  "de-DE",
-        ];
-
-        $this->assertSame($options, $provider->getOptions());
+        $this->assertSame("de-DE", $provider->getOptions()["language"]);
+    }
+    public function testConstructorOptions2()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Unexpected language code (where), codes should be 2 characters, a hyphen, and a further 2 characters");
+        new ResponsiveVoiceProvider("where");
     }
 }

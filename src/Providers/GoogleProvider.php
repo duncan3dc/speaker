@@ -22,8 +22,27 @@ class GoogleProvider extends AbstractProvider
     public function __construct(string $language = null)
     {
         if ($language !== null) {
-            $this->setLanguage($language);
+            $this->language = $this->getLanguage($language);
         }
+    }
+
+
+    /**
+     * Check if the language is valid, and convert it to the required format.
+     *
+     * @param string $language The language to use
+     *
+     * @return string
+     */
+    private function getLanguage(string $language): string
+    {
+        $language = trim($language);
+
+        if (strlen($language) !== 2) {
+            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters");
+        }
+
+        return $language;
     }
 
 
@@ -32,18 +51,15 @@ class GoogleProvider extends AbstractProvider
      *
      * @param string $language The language to use (eg 'en')
      *
-     * @return $this
+     * @return self
      */
-    public function setLanguage(string $language): self
+    public function withLanguage(string $language): self
     {
-        $language = trim($language);
-        if (strlen($language) !== 2) {
-            throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters");
-        }
+        $provider = clone $this;
 
-        $this->language = $language;
+        $provider->language = $this->getLanguage($language);
 
-        return $this;
+        return $provider;
     }
 
 

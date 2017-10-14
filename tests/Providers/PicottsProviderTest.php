@@ -11,6 +11,7 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class PicottsProviderTest extends TestCase
 {
+    private $provider;
     private $binary;
 
     public function setUp()
@@ -22,6 +23,8 @@ class PicottsProviderTest extends TestCase
         Handlers::handle("exec", function () {
             return $this->binary;
         });
+
+        $this->provider = new PicottsProvider;
     }
 
 
@@ -66,8 +69,7 @@ class PicottsProviderTest extends TestCase
         $process->shouldReceive("run")->withNoArgs()->andReturn(0);
         $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
 
-        $provider = new PicottsProvider;
-        $result = $provider->textToSpeech("Hello", $process);
+        $result = $this->provider->textToSpeech("Hello", $process);
         $this->assertSame("test-data", $result);
     }
 
@@ -94,8 +96,7 @@ class PicottsProviderTest extends TestCase
         $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(false);
         $process->shouldReceive("getErrorOutput")->withNoArgs()->andReturn("Unknown language: zh-CN\nextra boring stuff");
 
-        $provider = new PicottsProvider;
-        $provider->setLanguage("zh-CN");
+        $provider = $this->provider->withLanguage("zh-CN");
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unknown language: zh-CN");
@@ -117,66 +118,57 @@ class PicottsProviderTest extends TestCase
         $process->shouldReceive("run")->withNoArgs()->andReturn(0);
         $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
 
-        $provider = new PicottsProvider;
-
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
-        $provider->textToSpeech("Hello", $process);
+        $this->provider->textToSpeech("Hello", $process);
     }
 
 
     public function testGetFormat()
     {
-        $provider = new PicottsProvider;
-
-        $this->assertSame("wav", $provider->getFormat());
+        $this->assertSame("wav", $this->provider->getFormat());
     }
 
 
-    public function testSetLanguage()
+    public function testWithLanguage()
     {
-        $provider = new PicottsProvider;
+        $provider = $this->provider->withLanguage("fr");
 
-        $provider->setLanguage("fr");
+        $this->assertSame("fr-FR", $provider->getOptions()["language"]);
 
-        $options = [
-            "language"  =>  "fr-FR",
-        ];
-
-        $this->assertSame($options, $provider->getOptions());
+        # Ensure immutability
+        $this->assertSame("en-US", $this->provider->getOptions()["language"]);
     }
 
 
-    public function testSetLanguageFailure()
+    public function testWithLanguageFailure()
     {
-        $provider = new PicottsProvider;
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
-        $provider->setLanguage("k");
+        $this->provider->withLanguage("k");
     }
 
 
     public function testGetOptions()
     {
-        $provider = new PicottsProvider;
-
         $options = [
             "language"  =>  "en-US",
         ];
 
-        $this->assertSame($options, $provider->getOptions());
+        $this->assertSame($options, $this->provider->getOptions());
     }
 
 
-    public function testConstructorOptions()
+    public function testConstructorOptions1()
     {
-        $provider = new PicottsProvider("FR-fr");
+        $provider = new PicottsProvider("fr");
 
-        $options = [
-            "language"  =>  "fr-FR",
-        ];
-
-        $this->assertSame($options, $provider->getOptions());
+        $this->assertSame("fr-FR", $provider->getOptions()["language"]);
+    }
+    public function testConstructorOptions2()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters, a hyphen, and a further 2 characters");
+        new PicottsProvider("nope");
     }
 }

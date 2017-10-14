@@ -12,11 +12,15 @@ use PHPUnit\Framework\TestCase;
 
 class VoiceRssProviderTest extends TestCase
 {
+    private $provider;
     private $client;
 
     public function setUp()
     {
+        $this->provider = new VoiceRssProvider("APIKEY");
+
         $this->client = Mockery::mock(ClientInterface::class);
+        $this->provider->setClient($this->client);
     }
 
 
@@ -28,9 +32,6 @@ class VoiceRssProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-        $provider->setClient($this->client);
-
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
@@ -40,15 +41,12 @@ class VoiceRssProviderTest extends TestCase
             ->with("https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
-        $this->assertSame("mp3", $provider->textToSpeech("Hello"));
+        $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
     }
 
 
     public function testTextToSpeechFailure()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-        $provider->setClient($this->client);
-
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("ERROR: Test Message");
@@ -60,16 +58,17 @@ class VoiceRssProviderTest extends TestCase
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("TextToSpeech ERROR: Test Message");
-        $provider->textToSpeech("Hello");
+        $this->provider->textToSpeech("Hello");
     }
 
 
-    public function testSetLanguage()
+    public function testWithLanguage()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-        $provider->setClient($this->client);
+        $provider = $this->provider->withLanguage("fr");
 
-        $provider->setLanguage("fr");
+        # Ensure immutability
+        $this->assertSame("fr-fr", $provider->getOptions()["language"]);
+        $this->assertSame("en-gb", $this->provider->getOptions()["language"]);
 
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -84,22 +83,21 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testSetLanguageFailure()
+    public function testWithLanguageFailure()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
-        $provider->setLanguage("nope");
+        $this->provider->withLanguage("nope");
     }
 
 
-    public function testSetSpeed()
+    public function testWithSpeed()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-        $provider->setClient($this->client);
+        $provider = $this->provider->withSpeed(-5);
 
-        $provider->setSpeed(-5);
+        # Ensure immutability
+        $this->assertSame(-5, $provider->getOptions()["speed"]);
+        $this->assertSame(0, $this->provider->getOptions()["speed"]);
 
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -114,30 +112,26 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testSetSpeedFailure()
+    public function testWithSpeedFailure()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (11), must be a number between -10 and 10");
-        $provider->setSpeed(11);
+        $this->provider->withSpeed(11);
     }
 
 
     public function testGetOptions()
     {
-        $provider = new VoiceRssProvider("APIKEY");
-
         $options = [
             "language"  =>  "en-gb",
             "speed"     =>  0,
         ];
 
-        $this->assertSame($options, $provider->getOptions());
+        $this->assertSame($options, $this->provider->getOptions());
     }
 
 
-    public function testConstructorOptions()
+    public function testConstructorOptions1()
     {
         $provider = new VoiceRssProvider("APIKEY", "ab-cd", 10);
 
@@ -147,5 +141,17 @@ class VoiceRssProviderTest extends TestCase
         ];
 
         $this->assertSame($options, $provider->getOptions());
+    }
+    public function testConstructorOptions2()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Unexpected language code (who?), codes should be 2 characters");
+        new VoiceRssProvider("APIKEY", "who?");
+    }
+    public function testConstructorOptions3()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid speed (999), must be a number between -10 and 10");
+        new VoiceRssProvider("APIKEY", "en", 999);
     }
 }

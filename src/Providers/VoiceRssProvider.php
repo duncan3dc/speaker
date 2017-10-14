@@ -32,23 +32,23 @@ class VoiceRssProvider extends AbstractProvider
         $this->apikey = $apikey;
 
         if ($language !== null) {
-            $this->setLanguage($language);
+            $this->language = $this->getLanguage($language);
         }
 
         if ($speed !== null) {
-            $this->setSpeed($speed);
+            $this->speed = $this->getSpeed($speed);
         }
     }
 
 
     /**
-     * Set the language to use.
+     * Check if the language is valid, and convert it to the required format.
      *
-     * @param string $language The language to use (eg 'en')
+     * @param string $language The language to use
      *
-     * @return $this
+     * @return string
      */
-    public function setLanguage(string $language): self
+    private function getLanguage(string $language): string
     {
         $language = strtolower(trim($language));
 
@@ -60,9 +60,41 @@ class VoiceRssProvider extends AbstractProvider
             throw new InvalidArgumentException("Unexpected language code ({$language}), codes should be 2 characters, a hyphen, and a further 2 characters");
         }
 
-        $this->language = $language;
+        return $language;
+    }
 
-        return $this;
+
+    /**
+     * Set the language to use.
+     *
+     * @param string $language The language to use (eg 'en')
+     *
+     * @return self
+     */
+    public function withLanguage(string $language): self
+    {
+        $provider = clone $this;
+
+        $provider->language = $this->getLanguage($language);
+
+        return $provider;
+    }
+
+
+    /**
+     * Check the speech rate is valid.
+     *
+     * @param int $speed The speech rate to use
+     *
+     * @return int
+     */
+    private function getSpeed(int $speed)
+    {
+        if ($speed < -10 || $speed > 10) {
+            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
+        }
+
+        return $speed;
     }
 
 
@@ -73,16 +105,13 @@ class VoiceRssProvider extends AbstractProvider
      *
      * @return $this
      */
-    public function setSpeed(int $speed): self
+    public function withSpeed(int $speed): self
     {
-        $speed = (int) $speed;
-        if ($speed < -10 || $speed > 10) {
-            throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
-        }
+        $provider = clone $this;
 
-        $this->speed = $speed;
+        $provider->speed = $this->getSpeed($speed);
 
-        return $this;
+        return $provider;
     }
 
 

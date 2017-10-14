@@ -11,11 +11,15 @@ use PHPUnit\Framework\TestCase;
 
 class GoogleProviderTest extends TestCase
 {
+    private $provider;
     private $client;
 
     public function setUp()
     {
+        $this->provider = new GoogleProvider;
+
         $this->client = Mockery::mock(ClientInterface::class);
+        $this->provider->setClient($this->client);
     }
 
 
@@ -27,9 +31,6 @@ class GoogleProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $provider = new GoogleProvider("en");
-        $provider->setClient($this->client);
-
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
@@ -39,16 +40,17 @@ class GoogleProviderTest extends TestCase
             ->with("http://translate.google.com/translate_tts?q=Hello&tl=en&client=duncan3dc-speaker")
             ->andReturn($response);
 
-        $this->assertSame("mp3", $provider->textToSpeech("Hello"));
+        $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
     }
 
 
-    public function testSetLanguage()
+    public function testWithLanguage()
     {
-        $provider = new GoogleProvider;
-        $provider->setClient($this->client);
+        $provider = $this->provider->withLanguage("fr");
 
-        $provider->setLanguage("fr");
+        # Ensure immutability
+        $this->assertSame("fr", $provider->getOptions()["language"]);
+        $this->assertSame("en", $this->provider->getOptions()["language"]);
 
         $response = Mockery::mock(Response::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -63,34 +65,42 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function testSetLanguageFailure()
+    public function testWithLanguageFailure()
     {
-        $provider = new GoogleProvider;
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
-        $provider->setLanguage("nope");
+        $this->provider->withLanguage("nope");
     }
 
 
     public function testGetOptions()
     {
-        $provider = new GoogleProvider;
-
         $options = [
             "language"  =>  "en",
         ];
 
-        $this->assertSame($options, $provider->getOptions());
+        $this->assertSame($options, $this->provider->getOptions());
     }
 
 
     public function testSendRequestFailure()
     {
-        $provider = new GoogleProvider;
-
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Only messages under 100 characters are supported");
-        $provider->textToSpeech("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan laoreet sapien, eget posuere");
+        $this->provider->textToSpeech("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan laoreet sapien, eget posuere");
+    }
+
+
+    public function testConstructorOptions1()
+    {
+        $provider = new GoogleProvider("de");
+
+        $this->assertSame("de", $provider->getOptions()["language"]);
+    }
+    public function testConstructorOptions2()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Unexpected language code (when), codes should be 2 characters");
+        new GoogleProvider("when");
     }
 }

@@ -38,19 +38,19 @@ class PicottsProvider extends AbstractProvider
         $this->pico = $pico;
 
         if ($language !== null) {
-            $this->setLanguage($language);
+            $this->language = $this->getLanguage($language);
         }
     }
 
 
     /**
-     * Set the language to use.
+     * Check if the language is valid, and convert it to the required format.
      *
-     * @param string $language The language to use (eg 'en')
+     * @param string $language The language to use
      *
-     * @return $this
+     * @return string
      */
-    public function setLanguage(string $language): self
+    private function getLanguage(string $language): string
     {
         $language = trim($language);
 
@@ -63,9 +63,26 @@ class PicottsProvider extends AbstractProvider
         }
 
         list($main, $sub) = explode("-", $language);
-        $this->language = strtolower($main) . "-" . strtoupper($sub);
+        $language = strtolower($main) . "-" . strtoupper($sub);
 
-        return $this;
+        return $language;
+    }
+
+
+    /**
+     * Set the language to use.
+     *
+     * @param string $language The language to use (eg 'en')
+     *
+     * @return self
+     */
+    public function withLanguage(string $language): self
+    {
+        $provider = clone $this;
+
+        $provider->language = $this->getLanguage($language);
+
+        return $provider;
     }
 
 
