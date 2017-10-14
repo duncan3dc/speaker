@@ -6,8 +6,9 @@ use duncan3dc\Speaker\Providers\VoiceRssProvider;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
+class VoiceRssProviderTest extends TestCase
 {
     private $client;
 
@@ -55,7 +56,8 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
             ->with("https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
-        $this->setExpectedException("duncan3dc\Speaker\Exception", "TextToSpeech ERROR: Test Message");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("TextToSpeech ERROR: Test Message");
         $provider->textToSpeech("Hello");
     }
 
@@ -84,7 +86,8 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
     {
         $provider = new VoiceRssProvider("APIKEY");
 
-        $this->setExpectedException("InvalidArgumentException", "Unexpected language code (nope), codes should be 2 characters");
+        $this->expectException("InvalidArgumentException");
+        $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
         $provider->setLanguage("nope");
     }
 
@@ -113,7 +116,8 @@ class VoiceRssProviderTest extends \PHPUnit_Framework_TestCase
     {
         $provider = new VoiceRssProvider("APIKEY");
 
-        $this->setExpectedException("InvalidArgumentException", "Invalid speed (11), must be a number between -10 and 10");
+        $this->expectException("InvalidArgumentException");
+        $this->expectExceptionMessage("Invalid speed (11), must be a number between -10 and 10");
         $provider->setSpeed(11);
     }
 

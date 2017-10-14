@@ -6,8 +6,9 @@ use duncan3dc\Speaker\Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class AbstractProviderTest extends \PHPUnit_Framework_TestCase
+class AbstractProviderTest extends TestCase
 {
     private $client;
     private $provider;
@@ -70,7 +71,8 @@ class AbstractProviderTest extends \PHPUnit_Framework_TestCase
             ->with("http://example.com/?text=Hello")
             ->andReturn($response);
 
-        $this->setExpectedException(Exception::class, "Failed to call the external text-to-speech service");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Failed to call the external text-to-speech service");
         $this->provider->textToSpeech("Hello");
     }
 }

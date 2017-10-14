@@ -6,8 +6,9 @@ use duncan3dc\Speaker\Exception;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class TextToSpeechTest extends \PHPUnit_Framework_TestCase
+class TextToSpeechTest extends TestCase
 {
     private $provider;
     private $tts;
@@ -81,7 +82,8 @@ class TextToSpeechTest extends \PHPUnit_Framework_TestCase
 
         $path = "/no/such/path/test.mp3";
 
-        $this->setExpectedException(Exception::class, "Unable to save the file ({$path})");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Unable to save the file ({$path})");
         $this->tts->save($path);
     }
 

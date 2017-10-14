@@ -17,8 +17,8 @@
         "php": "^7.0"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "^5.5"
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^6.4"
     },
     "autoload": {
         "psr-4": {"duncan3dc\\Speaker\\": "src/"}

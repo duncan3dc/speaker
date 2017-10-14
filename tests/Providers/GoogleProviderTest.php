@@ -6,8 +6,9 @@ use duncan3dc\Speaker\Providers\GoogleProvider;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Message\Response;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
-class GoogleProviderTest extends \PHPUnit_Framework_TestCase
+class GoogleProviderTest extends TestCase
 {
     private $client;
 
@@ -65,7 +66,8 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
     {
         $provider = new GoogleProvider;
 
-        $this->setExpectedException("InvalidArgumentException", "Unexpected language code (nope), codes should be 2 characters");
+        $this->expectException("InvalidArgumentException");
+        $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
         $provider->setLanguage("nope");
     }
 
@@ -86,7 +88,8 @@ class GoogleProviderTest extends \PHPUnit_Framework_TestCase
     {
         $provider = new GoogleProvider;
 
-        $this->setExpectedException("InvalidArgumentException", "Only messages under 100 characters are supported");
+        $this->expectException("InvalidArgumentException");
+        $this->expectExceptionMessage("Only messages under 100 characters are supported");
         $provider->textToSpeech("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur accumsan laoreet sapien, eget posuere");
     }
 }

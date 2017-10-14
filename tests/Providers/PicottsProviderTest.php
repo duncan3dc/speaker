@@ -5,9 +5,10 @@ namespace duncan3dc\Speaker\Test\Providers;
 use duncan3dc\Speaker\Exception;
 use duncan3dc\Speaker\Providers\PicottsProvider;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ProcessBuilder;
 
-class PicottsProviderTest extends \PHPUnit_Framework_TestCase
+class PicottsProviderTest extends TestCase
 {
     private $binary;
 
@@ -37,7 +38,8 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
             return "";
         });
 
-        $this->setExpectedException(Exception::class, "Unable to find picotts program, please install pico2wave before trying again");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Unable to find picotts program, please install pico2wave before trying again");
         $provider = new PicottsProvider;
     }
 
@@ -94,7 +96,8 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
         $provider = new PicottsProvider;
         $provider->setLanguage("zh-CN");
 
-        $this->setExpectedException(Exception::class, "Unknown language: zh-CN");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Unknown language: zh-CN");
         $provider->textToSpeech("Hello", $process);
     }
 
@@ -115,7 +118,8 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
 
         $provider = new PicottsProvider;
 
-        $this->setExpectedException(Exception::class, "TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
         $provider->textToSpeech("Hello", $process);
     }
 
@@ -146,7 +150,8 @@ class PicottsProviderTest extends \PHPUnit_Framework_TestCase
     {
         $provider = new PicottsProvider;
 
-        $this->setExpectedException("InvalidArgumentException", "Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
+        $this->expectException("InvalidArgumentException");
+        $this->expectExceptionMessage("Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
         $provider->setLanguage("k");
     }
 
