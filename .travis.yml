@@ -20,9 +20,15 @@ install:
   - composer self-update
   - composer update $COMPOSER_OPTS
 
+before_script:
+  - if [ $TRAVIS_PHP_VERSION = "7.0" ]; then COVERAGE="--coverage-clover=clover.xml"; fi
+
 script:
-  - ./vendor/bin/phpunit
-  - ./tests/lint.sh
+  - vendor/bin/phpunit $COVERAGE
+  - tests/lint.sh
+
+after_success:
+  - if [ "$COVERAGE" != "" ]; then vendor/bin/coveralls; fi
 
 git:
   depth: 5
