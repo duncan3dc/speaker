@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 1.1.0 - 2018-03-09
+
+### Added
+
+* [Providers] AmazonPolly provider.
+
+--------
+
 ## 1.0.0 - 2017-10-14
 
 ### Added

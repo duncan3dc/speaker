@@ -21,6 +21,7 @@ _Read more at http://duncan3dc.github.io/speaker/_
 
 ## Services
 * __Acapela__ - _Paid voice as a service_
+* __AmazonPolly__ - _AWS service with a 12 month free tier_
 * __Google__ - _Unadvertised service with 100 character limit_
 * __Picotts__ - _An offline command line version_
 * __ResponsiveVoice__ - _Unadvertised service running over a javascript engine_
