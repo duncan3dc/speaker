@@ -4,9 +4,9 @@ A PHP library to convert text to speech using various services
 Full documentation is available at http://duncan3dc.github.io/speaker/  
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/speaker/api/](http://duncan3dc.github.io/speaker/api/namespaces/duncan3dc.Speaker.html)  
 
-[![Latest Stable Version](https://poser.pugx.org/duncan3dc/speaker/version.svg)](https://packagist.org/packages/duncan3dc/speaker)
-[![Build Status](https://travis-ci.org/duncan3dc/speaker.svg?branch=master)](https://travis-ci.org/duncan3dc/speaker)
-[![Coverage Status](https://coveralls.io/repos/github/duncan3dc/speaker/badge.svg)](https://coveralls.io/github/duncan3dc/speaker)
+[![release](https://poser.pugx.org/duncan3dc/speaker/version.svg)](https://packagist.org/packages/duncan3dc/speaker)
+[![build](https://travis-ci.org/duncan3dc/speaker.svg?branch=master)](https://travis-ci.org/duncan3dc/speaker)
+[![coverage](https://codecov.io/gh/duncan3dc/speaker/graph/badge.svg)](https://codecov.io/gh/duncan3dc/speaker)
 
 ## Quick Example
 
