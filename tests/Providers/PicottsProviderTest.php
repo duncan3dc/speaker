@@ -2,6 +2,7 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
+use duncan3dc\Mock\CoreFunction;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use duncan3dc\Speaker\Providers\PicottsProvider;
@@ -11,45 +12,52 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class PicottsProviderTest extends TestCase
 {
-    private $provider;
+    /** @var string|null */
     private $binary;
 
-    public function setUp()
+
+    public function tearDown()
+    {
+        if (is_string($this->binary) && is_file($this->binary)) {
+            unlink($this->binary);
+        }
+
+        CoreFunction::close();
+    }
+
+
+    private function setupBinary(): void
     {
         $this->binary = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "pico2wave";
 
         file_put_contents($this->binary, "bin");
 
-        Handlers::handle("exec", function () {
-            return $this->binary;
-        });
-
-        $this->provider = new PicottsProvider();
+        CoreFunction::mock("exec")->once()->with("which pico2wave")->andReturn($this->binary);
     }
 
 
-    public function tearDown()
+    private function getProvider(): PicottsProvider
     {
-        unlink($this->binary);
+        $this->setupBinary();
 
-        Handlers::clear();
+        return new PicottsProvider();
     }
 
 
     public function testBinaryInstalled()
     {
-        Handlers::handle("exec", function () {
-            return "";
-        });
+        CoreFunction::mock("exec")->once()->with("which pico2wave")->andReturn("");
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unable to find picotts program, please install pico2wave before trying again");
-        $provider = new PicottsProvider();
+        new PicottsProvider();
     }
 
 
     public function testTextToSpeech()
     {
+        $provider = $this->getProvider();
+
         $process = Mockery::mock(ProcessBuilder::class);
 
         # Get the specified filename and write some test data to it
@@ -69,13 +77,15 @@ class PicottsProviderTest extends TestCase
         $process->shouldReceive("run")->withNoArgs()->andReturn(0);
         $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
 
-        $result = $this->provider->textToSpeech("Hello", $process);
+        $result = $provider->textToSpeech("Hello", $process);
         $this->assertSame("test-data", $result);
     }
 
 
     public function testTextToSpeechUnknownLanguage()
     {
+        $provider = $this->getProvider();
+
         $process = Mockery::mock(ProcessBuilder::class);
 
         # Get the specified filename and write some test data to it
@@ -96,7 +106,7 @@ class PicottsProviderTest extends TestCase
         $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(false);
         $process->shouldReceive("getErrorOutput")->withNoArgs()->andReturn("Unknown language: zh-CN\nextra boring stuff");
 
-        $provider = $this->provider->withLanguage("zh-CN");
+        $provider = $provider->withLanguage("zh-CN");
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unknown language: zh-CN");
@@ -106,6 +116,8 @@ class PicottsProviderTest extends TestCase
 
     public function testTextToSpeechError()
     {
+        $provider = $this->getProvider();
+
         $process = Mockery::mock(ProcessBuilder::class);
 
         $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
@@ -120,53 +132,63 @@ class PicottsProviderTest extends TestCase
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
-        $this->provider->textToSpeech("Hello", $process);
+        $provider->textToSpeech("Hello", $process);
     }
 
 
     public function testGetFormat()
     {
-        $this->assertSame("wav", $this->provider->getFormat());
+        $provider = $this->getProvider();
+        $this->assertSame("wav", $provider->getFormat());
     }
 
 
     public function testWithLanguage()
     {
-        $provider = $this->provider->withLanguage("fr");
+        $english = $this->getProvider();
+        $french = $english->withLanguage("fr");
 
-        $this->assertSame("fr-FR", $provider->getOptions()["language"]);
+        $this->assertSame("fr-FR", $french->getOptions()["language"]);
 
         # Ensure immutability
-        $this->assertSame("en-US", $this->provider->getOptions()["language"]);
+        $this->assertSame("en-US", $english->getOptions()["language"]);
     }
 
 
     public function testWithLanguageFailure()
     {
+        $provider = $this->getProvider();
+
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
-        $this->provider->withLanguage("k");
+        $provider->withLanguage("k");
     }
 
 
     public function testGetOptions()
     {
+        $provider = $this->getProvider();
+
         $options = [
             "language"  =>  "en-US",
         ];
 
-        $this->assertSame($options, $this->provider->getOptions());
+        $this->assertSame($options, $provider->getOptions());
     }
 
 
     public function testConstructorOptions1()
     {
+        $this->setupBinary();
+
         $provider = new PicottsProvider("fr");
 
         $this->assertSame("fr-FR", $provider->getOptions()["language"]);
     }
     public function testConstructorOptions2()
     {
+        $this->setupBinary();
+
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters, a hyphen, and a further 2 characters");
         new PicottsProvider("nope");

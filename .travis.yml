@@ -15,6 +15,7 @@ env:
   - COMPOSER_OPTS="--prefer-lowest"
 
 install:
+  - pecl install uopz
   - composer update $COMPOSER_OPTS
 
 script:

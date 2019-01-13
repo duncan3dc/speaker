@@ -17,6 +17,7 @@
         "php": "^7.1"
     },
     "require-dev": {
+        "duncan3dc/uopz-expectations": "^0.2.0",
         "maglnet/composer-require-checker": "^1.1",
         "mockery/mockery": "^1.2",
         "squizlabs/php_codesniffer": "^3.3.2",
