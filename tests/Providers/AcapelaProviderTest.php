@@ -5,13 +5,17 @@ namespace duncan3dc\Speaker\Test\Providers;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Providers\AcapelaProvider;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\Response;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class AcapelaProviderTest extends TestCase
 {
+    /** @var AcapelaProvider */
     private $provider;
+
+    /** @var ClientInterface|MockInterface */
     private $client;
 
     public function setUp()
@@ -31,13 +35,13 @@ class AcapelaProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=rod22k&req_spd=180&req_text=Hello")
+            ->with("GET", "http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=rod22k&req_spd=180&req_text=Hello")
             ->andReturn($response);
 
         $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
@@ -52,13 +56,13 @@ class AcapelaProviderTest extends TestCase
         $this->assertSame("peter", $provider->getOptions()["voice"]);
         $this->assertSame("rod", $this->provider->getOptions()["voice"]);
 
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=peter22k&req_spd=180&req_text=Hello")
+            ->with("GET", "http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=peter22k&req_spd=180&req_text=Hello")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));
@@ -81,13 +85,13 @@ class AcapelaProviderTest extends TestCase
         $this->assertSame(260, $provider->getOptions()["speed"]);
         $this->assertSame(180, $this->provider->getOptions()["speed"]);
 
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=rod22k&req_spd=260&req_text=Hello")
+            ->with("GET", "http://vaas.acapela-group.com/Services/FileMaker.mp3?prot_vers=2&cl_login=LOGIN&cl_app=APPLICATION&cl_pwd=PASSWORD&req_voice=rod22k&req_spd=260&req_text=Hello")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));

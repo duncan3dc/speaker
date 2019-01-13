@@ -158,6 +158,10 @@ class PicottsProvider extends AbstractProvider
         }
 
         $result = file_get_contents($filename);
+        if ($result === false) {
+            throw new ProviderException("TextToSpeech unable to read file: {$filename}");
+        }
+
         unlink($filename);
 
         return $result;

@@ -5,13 +5,17 @@ namespace duncan3dc\Speaker\Test\Providers;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\Response;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class GoogleProviderTest extends TestCase
 {
+    /** @var GoogleProvider */
     private $provider;
+
+    /** @var ClientInterface|MockInterface */
     private $client;
 
     public function setUp()
@@ -31,13 +35,13 @@ class GoogleProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://translate.google.com/translate_tts?q=Hello&tl=en&client=duncan3dc-speaker")
+            ->with("GET", "http://translate.google.com/translate_tts?q=Hello&tl=en&client=duncan3dc-speaker")
             ->andReturn($response);
 
         $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
@@ -52,13 +56,13 @@ class GoogleProviderTest extends TestCase
         $this->assertSame("fr", $provider->getOptions()["language"]);
         $this->assertSame("en", $this->provider->getOptions()["language"]);
 
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://translate.google.com/translate_tts?q=Hello&tl=fr&client=duncan3dc-speaker")
+            ->with("GET", "http://translate.google.com/translate_tts?q=Hello&tl=fr&client=duncan3dc-speaker")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));

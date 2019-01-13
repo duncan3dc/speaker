@@ -15,20 +15,19 @@ use function trim;
  */
 class VoiceRssProvider extends AbstractProvider
 {
-    /**
-     * @var string $language The language to use.
-     */
+    /** @var string */
+    private $apikey;
+
+    /** @var string */
     private $language = "en-gb";
 
-    /**
-     * @var int $speed The speech rate.
-     */
+    /** @var int $speed */
     private $speed = 0;
 
     /**
      * Create a new instance.
      *
-     * @param string $api Your Voice RSS API key.
+     * @param string $apikey Your Voice RSS API key.
      * @param string $language The language to use.
      * @param int $speed The speech rate to use.
      */
@@ -147,7 +146,7 @@ class VoiceRssProvider extends AbstractProvider
             "key"   =>  $this->apikey,
             "src"   =>  $text,
             "hl"    =>  $this->language,
-            "r"     =>  $this->speed,
+            "r"     =>  (string) $this->speed,
             "c"     =>  "MP3",
             "f"     =>  "16khz_16bit_stereo",
         ]);

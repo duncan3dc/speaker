@@ -34,7 +34,7 @@ class TextToSpeech implements TextToSpeechInterface
      * Create a new instance.
      *
      * @param string $text The text to convert
-     * @param Directory $directory The directory to store the audio file in.
+     * @param ProviderInterface $provider
      */
     public function __construct(string $text, ProviderInterface $provider)
     {

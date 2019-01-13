@@ -6,13 +6,17 @@ use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use duncan3dc\Speaker\Providers\VoiceRssProvider;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\Response;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class VoiceRssProviderTest extends TestCase
 {
+    /** @var VoiceRssProvider */
     private $provider;
+
+    /** @var ClientInterface|MockInterface */
     private $client;
 
     public function setUp()
@@ -32,13 +36,13 @@ class VoiceRssProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
@@ -47,13 +51,13 @@ class VoiceRssProviderTest extends TestCase
 
     public function testTextToSpeechFailure()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("ERROR: Test Message");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->expectException(ProviderException::class);
@@ -70,13 +74,13 @@ class VoiceRssProviderTest extends TestCase
         $this->assertSame("fr-fr", $provider->getOptions()["language"]);
         $this->assertSame("en-gb", $this->provider->getOptions()["language"]);
 
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("https://api.voicerss.org/?key=APIKEY&src=Hello&hl=fr-fr&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=fr-fr&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));
@@ -99,13 +103,13 @@ class VoiceRssProviderTest extends TestCase
         $this->assertSame(-5, $provider->getOptions()["speed"]);
         $this->assertSame(0, $this->provider->getOptions()["speed"]);
 
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=-5&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=-5&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));

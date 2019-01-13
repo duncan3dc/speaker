@@ -1,11 +1,12 @@
 <?php
 
-namespace duncan3dc\SpeakerTests\Providers;
+namespace duncan3dc\Speaker\Test\Providers;
 
 use Aws\Polly\PollyClient;
 use Aws\Result;
 use duncan3dc\Speaker\Providers\AmazonPollyProvider;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 class AmazonPollyProviderTest extends TestCase
@@ -16,7 +17,7 @@ class AmazonPollyProviderTest extends TestCase
     private $provider;
 
     /**
-     * @var PollyClient $client The amazon polly client.
+     * @var PollyClient|MockInterface $client The amazon polly client.
      */
     private $client;
 

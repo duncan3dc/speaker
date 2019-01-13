@@ -84,7 +84,7 @@ abstract class AbstractProvider implements ProviderInterface
     {
         $url = $hostname . "?" . http_build_query($params);
 
-        $response = $this->getClient()->get($url);
+        $response = $this->getClient()->request("GET", $url);
 
         if ($response->getStatusCode() != "200") {
             throw new ProviderException("Failed to call the external text-to-speech service");

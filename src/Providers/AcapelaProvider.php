@@ -162,12 +162,12 @@ class AcapelaProvider extends AbstractProvider
         }
 
         return $this->sendRequest("http://vaas.acapela-group.com/Services/FileMaker.mp3", [
-            "prot_vers" =>  2,
+            "prot_vers" =>  "2",
             "cl_login"  =>  $this->login,
             "cl_app"    =>  $this->application,
             "cl_pwd"    =>  $this->password,
             "req_voice" =>  "{$this->voice}22k",
-            "req_spd"   =>  $this->speed,
+            "req_spd"   =>  (string) $this->speed,
             "req_text"  =>  $text,
         ]);
     }

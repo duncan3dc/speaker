@@ -5,13 +5,17 @@ namespace duncan3dc\Speaker\Test\Providers;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Providers\ResponsiveVoiceProvider;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\Response;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class ResponsiveVoiceProviderTest extends TestCase
 {
+    /** @var ResponsiveVoiceProvider */
     private $provider;
+
+    /** @var ClientInterface|MockInterface */
     private $client;
 
     public function setUp()
@@ -31,13 +35,13 @@ class ResponsiveVoiceProviderTest extends TestCase
 
     public function testTextToSpeech()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("https://code.responsivevoice.org/getvoice.php?tl=en-GB&t=Hello")
+            ->with("GET", "https://code.responsivevoice.org/getvoice.php?tl=en-GB&t=Hello")
             ->andReturn($response);
 
         $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));

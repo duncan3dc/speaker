@@ -4,14 +4,19 @@ namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\Response;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class AbstractProviderTest extends TestCase
 {
-    private $client;
+    /** @var ExampleProvider */
     private $provider;
+
+    /** @var ClientInterface|MockInterface */
+    private $client;
+
 
     public function setUp()
     {
@@ -48,13 +53,13 @@ class AbstractProviderTest extends TestCase
 
     public function testSendRequest()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
         $response->shouldReceive("getBody")->once()->andReturn("mp3");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://example.com/?text=Hello")
+            ->with("GET", "http://example.com/?text=Hello")
             ->andReturn($response);
 
         $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
@@ -63,12 +68,12 @@ class AbstractProviderTest extends TestCase
 
     public function testSendRequestFailure()
     {
-        $response = Mockery::mock(Response::class);
+        $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("500");
 
-        $this->client->shouldReceive("get")
+        $this->client->shouldReceive("request")
             ->once()
-            ->with("http://example.com/?text=Hello")
+            ->with("GET", "http://example.com/?text=Hello")
             ->andReturn($response);
 
         $this->expectException(ProviderException::class);
