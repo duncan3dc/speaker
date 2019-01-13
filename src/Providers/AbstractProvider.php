@@ -39,7 +39,7 @@ abstract class AbstractProvider implements ProviderInterface
     public function getClient(): ClientInterface
     {
         if ($this->client === null) {
-            $this->client = new Client;
+            $this->client = new Client();
         }
 
         return $this->client;

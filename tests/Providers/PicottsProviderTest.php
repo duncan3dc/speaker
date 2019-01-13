@@ -24,7 +24,7 @@ class PicottsProviderTest extends TestCase
             return $this->binary;
         });
 
-        $this->provider = new PicottsProvider;
+        $this->provider = new PicottsProvider();
     }
 
 
@@ -44,7 +44,7 @@ class PicottsProviderTest extends TestCase
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unable to find picotts program, please install pico2wave before trying again");
-        $provider = new PicottsProvider;
+        $provider = new PicottsProvider();
     }
 
 

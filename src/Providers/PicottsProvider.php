@@ -126,7 +126,7 @@ class PicottsProvider extends AbstractProvider
         }
 
         if ($builder === null) {
-            $builder = new ProcessBuilder;
+            $builder = new ProcessBuilder();
         }
 
         $process = $builder

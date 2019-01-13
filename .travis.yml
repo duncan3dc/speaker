@@ -28,6 +28,10 @@ jobs:
       script:
         - vendor/bin/composer-require-checker --config-file=.require.json
 
+    - stage: coding standards
+      script:
+        - vendor/bin/phpcs --standard=phpcs.xml src tests
+
     - stage: coverage
       script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml

@@ -16,7 +16,7 @@ class ResponsiveVoiceProviderTest extends TestCase
 
     public function setUp()
     {
-        $this->provider = new ResponsiveVoiceProvider;
+        $this->provider = new ResponsiveVoiceProvider();
 
         $this->client = Mockery::mock(ClientInterface::class);
         $this->provider->setClient($this->client);

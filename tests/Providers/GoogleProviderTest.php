@@ -16,7 +16,7 @@ class GoogleProviderTest extends TestCase
 
     public function setUp()
     {
-        $this->provider = new GoogleProvider;
+        $this->provider = new GoogleProvider();
 
         $this->client = Mockery::mock(ClientInterface::class);
         $this->provider->setClient($this->client);

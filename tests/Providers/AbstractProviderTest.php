@@ -16,7 +16,7 @@ class AbstractProviderTest extends TestCase
     public function setUp()
     {
         $this->client = Mockery::mock(ClientInterface::class);
-        $this->provider = new ExampleProvider;
+        $this->provider = new ExampleProvider();
         $this->provider->setClient($this->client);
     }
 
@@ -41,7 +41,7 @@ class AbstractProviderTest extends TestCase
 
     public function testGetClient()
     {
-        $provider = new ExampleProvider;
+        $provider = new ExampleProvider();
         $this->assertInstanceOf(ClientInterface::class, $provider->getClient());
     }
 
