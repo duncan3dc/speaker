@@ -7,6 +7,9 @@ use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+use function error_reporting;
+use function file_get_contents;
+use function unlink;
 
 class TextToSpeechTest extends TestCase
 {

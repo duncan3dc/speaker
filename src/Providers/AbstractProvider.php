@@ -5,6 +5,7 @@ namespace duncan3dc\Speaker\Providers;
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use function http_build_query;
 
 /**
  * Convert a string of a text to spoken word audio.

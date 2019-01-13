@@ -3,6 +3,12 @@
 namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+use function explode;
+use function preg_match;
+use function strlen;
+use function strtolower;
+use function strtoupper;
+use function trim;
 
 /**
  * Convert a string of a text to spoken word audio.

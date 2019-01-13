@@ -4,8 +4,18 @@ namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
-use duncan3dc\Speaker\Providers\AbstractProvider;
 use Symfony\Component\Process\ProcessBuilder;
+use function exec;
+use function explode;
+use function file_exists;
+use function file_get_contents;
+use function preg_match;
+use function strlen;
+use function strtolower;
+use function strtoupper;
+use function sys_get_temp_dir;
+use function trim;
+use function unlink;
 
 /**
  * Convert a string of a text to a spoken word wav.

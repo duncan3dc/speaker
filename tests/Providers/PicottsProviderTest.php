@@ -9,6 +9,12 @@ use duncan3dc\Speaker\Providers\PicottsProvider;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ProcessBuilder;
+use function file_put_contents;
+use function is_file;
+use function is_string;
+use function substr;
+use function sys_get_temp_dir;
+use function unlink;
 
 class PicottsProviderTest extends TestCase
 {
