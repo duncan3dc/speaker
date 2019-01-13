@@ -35,5 +35,15 @@
     },
     "autoload-dev": {
         "psr-4": {"duncan3dc\\Speaker\\Test\\": "tests/"}
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit",
+            "vendor/bin/composer-require-checker --config-file=.require.json",
+            "vendor/bin/phpstan analyse --level=max src",
+            "vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests",
+            "vendor/bin/phpcs --standard=phpcs.xml src tests",
+            "@composer validate --strict"
+        ]
     }
 }
