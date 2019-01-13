@@ -20,11 +20,14 @@ install:
 
 script:
   - vendor/bin/phpunit
-  - tests/lint.sh
-  - vendor/bin/composer-require-checker check --config-file=.require.json
 
 jobs:
   include:
+
+    - stage: dependencies
+      script:
+        - vendor/bin/composer-require-checker --config-file=.require.json
+
     - stage: coverage
       script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml
