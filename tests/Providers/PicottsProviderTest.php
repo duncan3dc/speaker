@@ -2,13 +2,16 @@
 
 namespace duncan3dc\Speaker\Test\Providers;
 
+use duncan3dc\Exec\FactoryInterface;
+use duncan3dc\Exec\ProgramInterface;
+use duncan3dc\Exec\ResultInterface;
 use duncan3dc\Mock\CoreFunction;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use duncan3dc\Speaker\Providers\PicottsProvider;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Process\ProcessBuilder;
 use function file_put_contents;
 use function is_file;
 use function is_string;
@@ -20,6 +23,19 @@ class PicottsProviderTest extends TestCase
 {
     /** @var string|null */
     private $binary;
+
+    /** @var FactoryInterface&MockInterface */
+    private $factory;
+
+    /** @var ResultInterface&MockInterface */
+    private $result;
+
+
+    public function setUp(): void
+    {
+        $this->factory = Mockery::mock(FactoryInterface::class);
+        $this->result = Mockery::mock(ResultInterface::class);
+    }
 
 
     public function tearDown()
@@ -50,6 +66,19 @@ class PicottsProviderTest extends TestCase
     }
 
 
+    /**
+     * @return ProgramInterface&MockInterface
+     */
+    private function getProgram(): ProgramInterface
+    {
+        $program = Mockery::mock(ProgramInterface::class);
+
+        $this->factory->shouldReceive("make")->once()->with($this->binary)->andReturn($program);
+
+        return $program;
+    }
+
+
     public function testBinaryInstalled()
     {
         CoreFunction::mock("exec")->once()->with("which pico2wave")->andReturn("");
@@ -63,27 +92,21 @@ class PicottsProviderTest extends TestCase
     public function testTextToSpeech()
     {
         $provider = $this->getProvider();
-
-        $process = Mockery::mock(ProcessBuilder::class);
+        $program = $this->getProgram();
 
         # Get the specified filename and write some test data to it
-        $process->shouldReceive("add")->with(Mockery::on(function ($option) {
+        $program->shouldReceive("getResult")->with(Mockery::on(function ($option) {
             if (substr($option, 0, 7) === "--wave=") {
                 $filename = substr($option, 7);
                 file_put_contents($filename, "test-data");
                 return true;
             }
             return false;
-        }))->andReturn($process);
+        }), "--lang=en-US", "Hello")->andReturn($this->result);
 
-        $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
-        $process->shouldReceive("add")->with("--lang=en-US")->andReturn($process);
-        $process->shouldReceive("add")->with("Hello")->andReturn($process);
-        $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
-        $process->shouldReceive("run")->withNoArgs()->andReturn(0);
-        $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
+        $this->result->shouldReceive("getStatus")->once()->with()->andReturn(0);
 
-        $result = $provider->textToSpeech("Hello", $process);
+        $result = $provider->textToSpeech("Hello", $this->factory);
         $this->assertSame("test-data", $result);
     }
 
@@ -91,54 +114,33 @@ class PicottsProviderTest extends TestCase
     public function testTextToSpeechUnknownLanguage()
     {
         $provider = $this->getProvider();
+        $program = $this->getProgram();
 
-        $process = Mockery::mock(ProcessBuilder::class);
+        $program->shouldReceive("getResult")->with(Mockery::type("string"), "--lang=zh-CN", "Hello")->andReturn($this->result);
 
-        # Get the specified filename and write some test data to it
-        $process->shouldReceive("add")->with(Mockery::on(function ($option) {
-            if (substr($option, 0, 7) === "--wave=") {
-                $filename = substr($option, 7);
-                file_put_contents($filename, "test-data");
-                return true;
-            }
-            return false;
-        }))->andReturn($process);
-
-        $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
-        $process->shouldReceive("add")->with("--lang=zh-CN")->andReturn($process);
-        $process->shouldReceive("add")->with("Hello")->andReturn($process);
-        $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
-        $process->shouldReceive("run")->withNoArgs()->andReturn(1);
-        $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(false);
-        $process->shouldReceive("getErrorOutput")->withNoArgs()->andReturn("Unknown language: zh-CN\nextra boring stuff");
+        $this->result->shouldReceive("getStatus")->once()->with()->andReturn(1);
+        $this->result->shouldReceive("getFirstLine")->once()->with()->andReturn("Unknown language: zh-CN");
 
         $provider = $provider->withLanguage("zh-CN");
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("Unknown language: zh-CN");
-        $provider->textToSpeech("Hello", $process);
+        $provider->textToSpeech("Hello", $this->factory);
     }
 
 
     public function testTextToSpeechError()
     {
         $provider = $this->getProvider();
+        $program = $this->getProgram();
 
-        $process = Mockery::mock(ProcessBuilder::class);
+        $program->shouldReceive("getResult")->with(Mockery::type("string"), "--lang=en-US", "Hello")->andReturn($this->result);
 
-        $process->shouldReceive("setPrefix")->with($this->binary)->andReturn($process);
-        $process->shouldReceive("add")->with(Mockery::on(function ($option) {
-            return (substr($option, 0, 7) === "--wave=");
-        }))->andReturn($process);
-        $process->shouldReceive("add")->with("--lang=en-US")->andReturn($process);
-        $process->shouldReceive("add")->with("Hello")->andReturn($process);
-        $process->shouldReceive("getProcess")->withNoArgs()->andReturn($process);
-        $process->shouldReceive("run")->withNoArgs()->andReturn(0);
-        $process->shouldReceive("isSuccessful")->withNoArgs()->andReturn(true);
+        $this->result->shouldReceive("getStatus")->once()->with()->andReturn(0);
 
         $this->expectException(ProviderException::class);
         $this->expectExceptionMessage("TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
-        $provider->textToSpeech("Hello", $process);
+        $provider->textToSpeech("Hello", $this->factory);
     }
 
 

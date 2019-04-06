@@ -12,8 +12,8 @@
         "role": "Developer"
     }],
     "require": {
+        "duncan3dc/exec": "^0.3.0",
         "guzzlehttp/guzzle": "^6.0",
-        "symfony/process": "^2.8|^3.0",
         "php": "^7.2"
     },
     "require-dev": {

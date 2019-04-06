@@ -2,9 +2,11 @@
 
 namespace duncan3dc\Speaker\Providers;
 
+use duncan3dc\Exec\FactoryInterface;
+use duncan3dc\Exec\Output\Silent;
+use duncan3dc\Exec\Program;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
-use Symfony\Component\Process\ProcessBuilder;
 use function exec;
 use function explode;
 use function file_exists;
@@ -124,10 +126,11 @@ class PicottsProvider extends AbstractProvider
      * Convert the specified text to audio.
      *
      * @param string $text The text to convert
+     * @param FactoryInterface $factory
      *
      * @return string The audio data
      */
-    public function textToSpeech(string $text, ProcessBuilder $builder = null): string
+    public function textToSpeech(string $text, FactoryInterface $factory = null): string
     {
         $filename = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "speaker_picotts.wav";
 
@@ -135,22 +138,16 @@ class PicottsProvider extends AbstractProvider
             unlink($filename);
         }
 
-        if ($builder === null) {
-            $builder = new ProcessBuilder();
+        if ($factory === null) {
+            $program = new Program($this->pico, new Silent());
+        } else {
+            $program = $factory->make($this->pico);
         }
 
-        $process = $builder
-            ->setPrefix($this->pico)
-            ->add("--wave={$filename}")
-            ->add("--lang={$this->language}")
-            ->add($text);
+        $result = $program->getResult("--wave={$filename}", "--lang={$this->language}", $text);
 
-        $process = $builder->getProcess();
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            $output = $process->getErrorOutput();
-            throw new ProviderException(explode("\n", $output)[0]);
+        if ($result->getStatus() !== 0) {
+            throw new ProviderException($result->getFirstLine());
         }
 
         if (!file_exists($filename)) {

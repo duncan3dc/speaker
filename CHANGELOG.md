@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 1.3.0 - 2019-04-06
+
+### Changed
+
+* [Providers] Use duncan3dc/exec in the Picotts provider for shell commands.
+* [Support] Dropped support for PHP 7.1.
+
+--------
+
 ## 1.2.0 - 2019-01-13
 
 ### Changed
