@@ -19,7 +19,7 @@ class VoiceRssProviderTest extends TestCase
     /** @var ClientInterface|MockInterface */
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = new VoiceRssProvider("APIKEY");
 
@@ -28,13 +28,13 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testTextToSpeech()
+    public function testTextToSpeech(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -49,7 +49,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testTextToSpeechFailure()
+    public function testTextToSpeechFailure(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -66,7 +66,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testWithLanguage()
+    public function testWithLanguage(): void
     {
         $provider = $this->provider->withLanguage("fr");
 
@@ -87,7 +87,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testWithLanguageFailure()
+    public function testWithLanguageFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
@@ -95,7 +95,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testWithSpeed()
+    public function testWithSpeed(): void
     {
         $provider = $this->provider->withSpeed(-5);
 
@@ -116,7 +116,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testWithSpeedFailure()
+    public function testWithSpeedFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (11), must be a number between -10 and 10");
@@ -124,7 +124,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $options = [
             "language"  =>  "en-gb",
@@ -135,7 +135,7 @@ class VoiceRssProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions1()
+    public function testConstructorOptions1(): void
     {
         $provider = new VoiceRssProvider("APIKEY", "ab-cd", 10);
 
@@ -146,13 +146,13 @@ class VoiceRssProviderTest extends TestCase
 
         $this->assertSame($options, $provider->getOptions());
     }
-    public function testConstructorOptions2()
+    public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (who?), codes should be 2 characters");
         new VoiceRssProvider("APIKEY", "who?");
     }
-    public function testConstructorOptions3()
+    public function testConstructorOptions3(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (999), must be a number between -10 and 10");

@@ -22,20 +22,20 @@ class AmazonPollyProviderTest extends TestCase
     private $client;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = Mockery::mock(PollyClient::class);
         $this->provider = new AmazonPollyProvider($this->client);
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testTextToSpeech()
+    public function testTextToSpeech(): void
     {
         $result = Mockery::mock(Result::class);
         $result->shouldReceive("get")->with("AudioStream")->once()->andReturn("mp3");
@@ -49,7 +49,7 @@ class AmazonPollyProviderTest extends TestCase
     }
 
 
-    public function testWithVoice()
+    public function testWithVoice(): void
     {
         $provider = $this->provider->withVoice("Brian");
 
@@ -69,7 +69,7 @@ class AmazonPollyProviderTest extends TestCase
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $options = [
             "voice" =>  "Emma",
@@ -79,7 +79,7 @@ class AmazonPollyProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions1()
+    public function testConstructorOptions1(): void
     {
         $provider = new AmazonPollyProvider($this->client, "Fred");
 

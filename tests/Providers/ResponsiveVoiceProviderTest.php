@@ -18,7 +18,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     /** @var ClientInterface|MockInterface */
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = new ResponsiveVoiceProvider();
 
@@ -27,13 +27,13 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testTextToSpeech()
+    public function testTextToSpeech(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -48,7 +48,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function testWithLanguage()
+    public function testWithLanguage(): void
     {
         $provider = $this->provider->withLanguage("ru");
 
@@ -59,7 +59,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function testWithLanguageFailure()
+    public function testWithLanguageFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (k), codes should be 2 characters, a hyphen, and a further 2 characters");
@@ -67,7 +67,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $options = [
             "language"  =>  "en-GB",
@@ -77,13 +77,13 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions1()
+    public function testConstructorOptions1(): void
     {
         $provider = new ResponsiveVoiceProvider("de-de");
 
         $this->assertSame("de-DE", $provider->getOptions()["language"]);
     }
-    public function testConstructorOptions2()
+    public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (where), codes should be 2 characters, a hyphen, and a further 2 characters");

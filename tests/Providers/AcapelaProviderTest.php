@@ -18,7 +18,7 @@ class AcapelaProviderTest extends TestCase
     /** @var ClientInterface|MockInterface */
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
 
@@ -27,13 +27,13 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testTextToSpeech()
+    public function testTextToSpeech(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -48,7 +48,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testWithVoice()
+    public function testWithVoice(): void
     {
         $provider = $this->provider->withVoice("Peter");
 
@@ -69,7 +69,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testWithVoiceFailure()
+    public function testWithVoiceFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected voice name (ke), names should be at least 3 characters long");
@@ -77,7 +77,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testWithSpeed()
+    public function testWithSpeed(): void
     {
         $provider = $this->provider->withSpeed(260);
 
@@ -98,7 +98,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testWithSpeedFailure()
+    public function testWithSpeedFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (30), must be a number between 60 and 360");
@@ -106,7 +106,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $options = [
             "voice" =>  "rod",
@@ -117,7 +117,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testSendRequestFailure()
+    public function testSendRequestFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Only messages under 300 characters are supported");
@@ -125,7 +125,7 @@ class AcapelaProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions1()
+    public function testConstructorOptions1(): void
     {
         $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "lucy", 190);
 
@@ -136,13 +136,13 @@ class AcapelaProviderTest extends TestCase
 
         $this->assertSame($options, $provider->getOptions());
     }
-    public function testConstructorOptions2()
+    public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected voice name (no), names should be at least 3 characters long");
         new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "no");
     }
-    public function testConstructorOptions3()
+    public function testConstructorOptions3(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Invalid speed (50), must be a number between 60 and 360");

@@ -16,20 +16,20 @@ class TextToSpeechTest extends TestCase
     private $provider;
     private $tts;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = Mockery::mock(ProviderInterface::class);
         $this->tts = new TextToSpeech("hello", $this->provider);
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testGetAudioData()
+    public function testGetAudioData(): void
     {
         $this->provider->shouldReceive("textToSpeech")
             ->once()
@@ -42,7 +42,7 @@ class TextToSpeechTest extends TestCase
     }
 
 
-    public function testGenerateFilename()
+    public function testGenerateFilename(): void
     {
         $this->provider->shouldReceive("getOptions")
             ->once()
@@ -58,7 +58,7 @@ class TextToSpeechTest extends TestCase
     }
 
 
-    public function testSave()
+    public function testSave(): void
     {
         $this->provider->shouldReceive("textToSpeech")
             ->once()
@@ -74,7 +74,7 @@ class TextToSpeechTest extends TestCase
     }
 
 
-    public function testSaveFail()
+    public function testSaveFail(): void
     {
         error_reporting(E_ALL ^ E_WARNING);
 
@@ -91,7 +91,7 @@ class TextToSpeechTest extends TestCase
     }
 
 
-    public function testGetFile()
+    public function testGetFile(): void
     {
         $this->provider->shouldReceive("getFormat")
             ->twice()

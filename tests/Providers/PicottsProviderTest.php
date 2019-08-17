@@ -38,7 +38,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if (is_string($this->binary) && is_file($this->binary)) {
             unlink($this->binary);
@@ -79,7 +79,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testBinaryInstalled()
+    public function testBinaryInstalled(): void
     {
         CoreFunction::mock("exec")->once()->with("which pico2wave")->andReturn("");
 
@@ -89,7 +89,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testTextToSpeech()
+    public function testTextToSpeech(): void
     {
         $provider = $this->getProvider();
         $program = $this->getProgram();
@@ -111,7 +111,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testTextToSpeechUnknownLanguage()
+    public function testTextToSpeechUnknownLanguage(): void
     {
         $provider = $this->getProvider();
         $program = $this->getProgram();
@@ -129,7 +129,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testTextToSpeechError()
+    public function testTextToSpeechError(): void
     {
         $provider = $this->getProvider();
         $program = $this->getProgram();
@@ -144,14 +144,14 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testGetFormat()
+    public function testGetFormat(): void
     {
         $provider = $this->getProvider();
         $this->assertSame("wav", $provider->getFormat());
     }
 
 
-    public function testWithLanguage()
+    public function testWithLanguage(): void
     {
         $english = $this->getProvider();
         $french = $english->withLanguage("fr");
@@ -163,7 +163,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testWithLanguageFailure()
+    public function testWithLanguageFailure(): void
     {
         $provider = $this->getProvider();
 
@@ -173,7 +173,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $provider = $this->getProvider();
 
@@ -185,7 +185,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions1()
+    public function testConstructorOptions1(): void
     {
         $this->setupBinary();
 
@@ -193,7 +193,7 @@ class PicottsProviderTest extends TestCase
 
         $this->assertSame("fr-FR", $provider->getOptions()["language"]);
     }
-    public function testConstructorOptions2()
+    public function testConstructorOptions2(): void
     {
         $this->setupBinary();
 

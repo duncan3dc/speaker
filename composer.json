@@ -17,15 +17,15 @@
         "php": "^7.2"
     },
     "require-dev": {
-        "aws/aws-sdk-php": "^3.85",
-        "duncan3dc/uopz-expectations": "^0.2.0",
-        "maglnet/composer-require-checker": "^1.1",
+        "aws/aws-sdk-php": "^3.109",
+        "duncan3dc/uopz-expectations": "^0.3.0",
+        "maglnet/composer-require-checker": "^2.0",
         "mockery/mockery": "^1.2",
-        "phpstan/phpstan": "^0.10.5",
-        "phpstan/phpstan-mockery": "^0.10.2",
-        "phpstan/phpstan-phpunit": "^0.10.0",
-        "squizlabs/php_codesniffer": "^3.3.2",
-        "phpunit/phpunit": "^7.5"
+        "phpstan/phpstan": "^0.11.14",
+        "phpstan/phpstan-mockery": "^0.11.3",
+        "phpstan/phpstan-phpunit": "^0.11.2",
+        "squizlabs/php_codesniffer": "^3.4",
+        "phpunit/phpunit": "^8.3"
     },
     "suggest": {
         "aws/aws-sdk-php": "Allows you to use the AmazonPollyProvider"

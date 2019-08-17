@@ -18,7 +18,7 @@ class GoogleProviderTest extends TestCase
     /** @var ClientInterface|MockInterface */
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->provider = new GoogleProvider();
 
@@ -27,13 +27,13 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testTextToSpeech()
+    public function testTextToSpeech(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -48,7 +48,7 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function testWithLanguage()
+    public function testWithLanguage(): void
     {
         $provider = $this->provider->withLanguage("fr");
 
@@ -69,7 +69,7 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function testWithLanguageFailure()
+    public function testWithLanguageFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
@@ -77,7 +77,7 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $options = [
             "language"  =>  "en",
@@ -87,7 +87,7 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function testSendRequestFailure()
+    public function testSendRequestFailure(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Only messages under 100 characters are supported");
@@ -95,13 +95,13 @@ class GoogleProviderTest extends TestCase
     }
 
 
-    public function testConstructorOptions1()
+    public function testConstructorOptions1(): void
     {
         $provider = new GoogleProvider("de");
 
         $this->assertSame("de", $provider->getOptions()["language"]);
     }
-    public function testConstructorOptions2()
+    public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (when), codes should be 2 characters");

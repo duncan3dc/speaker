@@ -18,7 +18,7 @@ class AbstractProviderTest extends TestCase
     private $client;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = Mockery::mock(ClientInterface::class);
         $this->provider = new ExampleProvider();
@@ -26,32 +26,32 @@ class AbstractProviderTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
 
 
-    public function testGetFormat()
+    public function testGetFormat(): void
     {
         $this->assertSame("mp3", $this->provider->getFormat());
     }
 
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $this->assertSame([], $this->provider->getOptions());
     }
 
 
-    public function testGetClient()
+    public function testGetClient(): void
     {
         $provider = new ExampleProvider();
         $this->assertInstanceOf(ClientInterface::class, $provider->getClient());
     }
 
 
-    public function testSendRequest()
+    public function testSendRequest(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
@@ -66,7 +66,7 @@ class AbstractProviderTest extends TestCase
     }
 
 
-    public function testSendRequestFailure()
+    public function testSendRequestFailure(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("500");
