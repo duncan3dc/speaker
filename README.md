@@ -36,3 +36,10 @@ A [Changelog](CHANGELOG.md) has been available since the beginning of time
 Found a bug? Got a question? Just not sure how something works?  
 Please [create an issue](//github.com/duncan3dc/speaker/issues) and I'll do my best to help out.  
 Alternatively you can catch me on [Twitter](https://twitter.com/duncan3dc)
+
+
+## duncan3dc/speaker for enterprise
+
+Available as part of the Tidelift Subscription
+
+The maintainers of duncan3dc/speaker and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/packagist-duncan3dc-speaker?utm_source=packagist-duncan3dc-speaker&utm_medium=referral&utm_campaign=readme)
