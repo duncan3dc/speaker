@@ -12,8 +12,8 @@
         "role": "Developer"
     }],
     "require": {
-        "duncan3dc/exec": "^0.3.0",
-        "guzzlehttp/guzzle": "^6.0",
+        "duncan3dc/exec": "^0.4.0",
+        "guzzlehttp/guzzle": "^6.0|^7.0",
         "php": "^7.2"
     },
     "require-dev": {
