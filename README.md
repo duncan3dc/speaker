@@ -5,7 +5,7 @@ Full documentation is available at http://duncan3dc.github.io/speaker/
 PHPDoc API documentation is also available at [http://duncan3dc.github.io/speaker/api/](http://duncan3dc.github.io/speaker/api/namespaces/duncan3dc.Speaker.html)  
 
 [![release](https://poser.pugx.org/duncan3dc/speaker/version.svg)](https://packagist.org/packages/duncan3dc/speaker)
-[![build](https://travis-ci.org/duncan3dc/speaker.svg?branch=master)](https://travis-ci.org/duncan3dc/speaker)
+[![build](https://github.com/duncan3dc/speaker/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=master)](https://github.com/duncan3dc/speaker/actions?query=branch%3Amaster+workflow%3A.github%2Fworkflows%2Fbuildcheck.yml)
 [![coverage](https://codecov.io/gh/duncan3dc/speaker/graph/badge.svg)](https://codecov.io/gh/duncan3dc/speaker)
 
 ## Quick Example
