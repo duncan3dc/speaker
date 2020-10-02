@@ -7,6 +7,7 @@ use duncan3dc\Exec\Output\Silent;
 use duncan3dc\Exec\Program;
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
+
 use function exec;
 use function explode;
 use function file_exists;

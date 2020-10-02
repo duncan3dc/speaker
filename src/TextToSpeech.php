@@ -4,6 +4,7 @@ namespace duncan3dc\Speaker;
 
 use duncan3dc\Speaker\Exceptions\RuntimeException;
 use duncan3dc\Speaker\Providers\ProviderInterface;
+
 use function file_put_contents;
 use function is_file;
 use function md5;

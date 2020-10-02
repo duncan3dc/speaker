@@ -3,6 +3,7 @@
 namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+
 use function explode;
 use function preg_match;
 use function strlen;

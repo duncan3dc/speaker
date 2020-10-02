@@ -4,6 +4,7 @@ namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
+
 use function preg_match;
 use function strlen;
 use function strtolower;

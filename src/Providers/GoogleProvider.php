@@ -3,6 +3,7 @@
 namespace duncan3dc\Speaker\Providers;
 
 use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
+
 use function strlen;
 use function trim;
 

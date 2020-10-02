@@ -12,6 +12,7 @@ use duncan3dc\Speaker\Providers\PicottsProvider;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
+
 use function file_put_contents;
 use function is_file;
 use function is_string;
