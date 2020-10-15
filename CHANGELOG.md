@@ -5,6 +5,14 @@ Changelog
 
 --------
 
+## 1.3.1 - 2020-10-15
+
+### Changed
+
+* [Support] Added support for Guzzle 7.
+
+--------
+
 ## 1.3.0 - 2019-04-06
 
 ### Changed
