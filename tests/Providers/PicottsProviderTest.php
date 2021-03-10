@@ -32,14 +32,14 @@ class PicottsProviderTest extends TestCase
     private $result;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->factory = Mockery::mock(FactoryInterface::class);
         $this->result = Mockery::mock(ResultInterface::class);
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         if (is_string($this->binary) && is_file($this->binary)) {
             unlink($this->binary);

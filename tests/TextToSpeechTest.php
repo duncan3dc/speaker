@@ -17,14 +17,14 @@ class TextToSpeechTest extends TestCase
     private $provider;
     private $tts;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->provider = Mockery::mock(ProviderInterface::class);
         $this->tts = new TextToSpeech("hello", $this->provider);
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
     }
