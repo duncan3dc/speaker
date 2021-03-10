@@ -22,14 +22,14 @@ class AmazonPollyProviderTest extends TestCase
     private $client;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = Mockery::mock(PollyClient::class);
         $this->provider = new AmazonPollyProvider($this->client);
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
     }
