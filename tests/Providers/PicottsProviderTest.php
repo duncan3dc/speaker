@@ -28,7 +28,7 @@ class PicottsProviderTest extends TestCase
     /** @var FactoryInterface&MockInterface */
     private $factory;
 
-    /** @var ResultInterface&MockInterface */
+    /** @var ResultInterface<string>&MockInterface */
     private $result;
 
 

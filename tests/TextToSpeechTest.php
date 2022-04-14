@@ -6,6 +6,7 @@ use duncan3dc\Speaker\Exceptions\RuntimeException;
 use duncan3dc\Speaker\Providers\ProviderInterface;
 use duncan3dc\Speaker\TextToSpeech;
 use Mockery;
+use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 
 use function error_reporting;
@@ -14,8 +15,12 @@ use function unlink;
 
 class TextToSpeechTest extends TestCase
 {
+    /** @var ProviderInterface&MockInterface  */
     private $provider;
+
+    /** @var TextToSpeech */
     private $tts;
+
 
     protected function setUp(): void
     {

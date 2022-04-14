@@ -20,7 +20,7 @@ interface ProviderInterface
      * This is used in caching to determine if we have sent a request
      * with these options before and can use the previous result.
      *
-     * @return array
+     * @return array<string, string|int>
      */
     public function getOptions(): array;
 

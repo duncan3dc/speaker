@@ -66,11 +66,6 @@ class GoogleProvider extends AbstractProvider
     }
 
 
-    /**
-     * Get the current options.
-     *
-     * @return array
-     */
     public function getOptions(): array
     {
         return [

@@ -59,14 +59,6 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
 
-    /**
-     * Get the current options.
-     *
-     * This is used in caching to determine if we have sent a request
-     * with these options before and can use the previous result.
-     *
-     * @return array
-     */
     public function getOptions(): array
     {
         return [];

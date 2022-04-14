@@ -77,11 +77,6 @@ class ResponsiveVoiceProvider extends AbstractProvider
     }
 
 
-    /**
-     * Get the current options.
-     *
-     * @return array
-     */
     public function getOptions(): array
     {
         return [

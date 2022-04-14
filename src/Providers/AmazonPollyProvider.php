@@ -64,11 +64,6 @@ class AmazonPollyProvider implements ProviderInterface
     }
 
 
-    /**
-     * Get the current options.
-     *
-     * @return array
-     */
     public function getOptions(): array
     {
         return [

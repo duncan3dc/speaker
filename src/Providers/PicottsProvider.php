@@ -43,7 +43,7 @@ class PicottsProvider extends AbstractProvider
      */
     public function __construct(string $language = null)
     {
-        $pico = trim(exec("which pico2wave"));
+        $pico = trim((string) exec("which pico2wave"));
         if (!file_exists($pico)) {
             throw new ProviderException("Unable to find picotts program, please install pico2wave before trying again");
         }
@@ -110,11 +110,6 @@ class PicottsProvider extends AbstractProvider
     }
 
 
-    /**
-     * Get the current options.
-     *
-     * @return array
-     */
     public function getOptions(): array
     {
         return [
