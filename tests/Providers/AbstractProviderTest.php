@@ -18,7 +18,7 @@ class AbstractProviderTest extends TestCase
     private $client;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->client = Mockery::mock(ClientInterface::class);
         $this->provider = new ExampleProvider();
@@ -26,7 +26,7 @@ class AbstractProviderTest extends TestCase
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
     }

@@ -18,7 +18,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     /** @var ClientInterface|MockInterface */
     private $client;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->provider = new ResponsiveVoiceProvider();
 
@@ -27,7 +27,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
     }
