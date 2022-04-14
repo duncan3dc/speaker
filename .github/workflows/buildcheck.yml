@@ -1,5 +1,6 @@
 on:
   push:
+  pull_request:
   schedule:
     - cron: 0 10 13 * *
 
@@ -10,9 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - 7.2
-          - 7.3
-          - 7.4
+          - "7.2"
+          - "7.3"
+          - "7.4"
         composer:
           - ""
           - "--prefer-lowest"
