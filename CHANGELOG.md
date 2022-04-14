@@ -5,6 +5,15 @@ Changelog
 
 --------
 
+## 1.4.0 - 2022-04-14
+
+### Changed
+
+* [Support] Added support for PHP 8.0, and 8.1.
+* [Support] Dropped support for PHP 7.2.
+
+--------
+
 ## 1.3.1 - 2020-10-15
 
 ### Changed
