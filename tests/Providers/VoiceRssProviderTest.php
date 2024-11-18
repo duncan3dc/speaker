@@ -6,6 +6,7 @@ use duncan3dc\Speaker\Exceptions\InvalidArgumentException;
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use duncan3dc\Speaker\Providers\VoiceRssProvider;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Utils;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
@@ -38,7 +39,7 @@ class VoiceRssProviderTest extends TestCase
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
-        $response->shouldReceive("getBody")->once()->andReturn("mp3");
+        $response->shouldReceive("getBody")->once()->andReturn(Utils::streamFor("mp3"));
 
         $this->client->shouldReceive("request")
             ->once()
@@ -53,7 +54,7 @@ class VoiceRssProviderTest extends TestCase
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
-        $response->shouldReceive("getBody")->once()->andReturn("ERROR: Test Message");
+        $response->shouldReceive("getBody")->once()->andReturn(Utils::streamFor("ERROR: Test Message"));
 
         $this->client->shouldReceive("request")
             ->once()
@@ -76,7 +77,7 @@ class VoiceRssProviderTest extends TestCase
 
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
-        $response->shouldReceive("getBody")->once()->andReturn("mp3");
+        $response->shouldReceive("getBody")->once()->andReturn(Utils::streamFor("mp3"));
 
         $this->client->shouldReceive("request")
             ->once()
@@ -105,7 +106,7 @@ class VoiceRssProviderTest extends TestCase
 
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
-        $response->shouldReceive("getBody")->once()->andReturn("mp3");
+        $response->shouldReceive("getBody")->once()->andReturn(Utils::streamFor("mp3"));
 
         $this->client->shouldReceive("request")
             ->once()

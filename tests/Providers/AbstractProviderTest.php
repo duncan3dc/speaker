@@ -4,6 +4,7 @@ namespace duncan3dc\Speaker\Test\Providers;
 
 use duncan3dc\Speaker\Exceptions\ProviderException;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Utils;
 use Mockery;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
@@ -55,7 +56,7 @@ class AbstractProviderTest extends TestCase
     {
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive("getStatusCode")->once()->andReturn("200");
-        $response->shouldReceive("getBody")->once()->andReturn("mp3");
+        $response->shouldReceive("getBody")->once()->andReturn(Utils::streamFor("mp3"));
 
         $this->client->shouldReceive("request")
             ->once()
