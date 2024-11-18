@@ -5,6 +5,18 @@ Changelog
 
 --------
 
+## 1.4.1 - 2022-04-14
+
+### Fixed
+
+* [Providers] Ensure the local filename is unique per text/language. ([#23](https://github.com/duncan3dc/speaker/issues/23))
+
+### Changed
+
+* [Support] Added support for PHP 8.2, and 8.3.
+
+--------
+
 ## 1.4.0 - 2022-04-14
 
 ### Changed

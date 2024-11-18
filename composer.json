@@ -19,7 +19,7 @@
     "require-dev": {
         "aws/aws-sdk-php": "^3.219.3",
         "duncan3dc/uopz-expectations": "^0.3 || ^1.0",
-        "maglnet/composer-require-checker": "^2.0 || ^3.0",
+        "maglnet/composer-require-checker": "^2.0 || ^3.0 || ^4.0",
         "mockery/mockery": "^1.5",
         "nikic/php-parser": "^4.13",
         "phpstan/phpstan": "^0.12.99",
