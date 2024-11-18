@@ -140,7 +140,7 @@ class PicottsProviderTest extends TestCase
         $this->result->shouldReceive("getStatus")->once()->with()->andReturn(0);
 
         $this->expectException(ProviderException::class);
-        $this->expectExceptionMessage("TextToSpeech unable to create file: /tmp/speaker_picotts.wav");
+        $this->expectExceptionMessageMatches("/^TextToSpeech unable to create file: \/tmp\/speaker_picotts_en-US_[a-f0-9]{32}\.wav$/");
         $provider->textToSpeech("Hello", $this->factory);
     }
 

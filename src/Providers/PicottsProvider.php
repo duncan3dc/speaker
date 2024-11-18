@@ -12,6 +12,7 @@ use function exec;
 use function explode;
 use function file_exists;
 use function file_get_contents;
+use function md5;
 use function preg_match;
 use function strlen;
 use function strtolower;
@@ -128,7 +129,7 @@ class PicottsProvider extends AbstractProvider
      */
     public function textToSpeech(string $text, FactoryInterface $factory = null): string
     {
-        $filename = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "speaker_picotts.wav";
+        $filename = sys_get_temp_dir() . \DIRECTORY_SEPARATOR . "speaker_picotts_{$this->language}_" . md5($text) . ".wav";
 
         if (file_exists($filename)) {
             unlink($filename);
