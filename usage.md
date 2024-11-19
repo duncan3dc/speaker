@@ -13,7 +13,7 @@ require_once __DIR__ . "vendor/autoload.php";
 use duncan3dc\Speaker\TextToSpeech;
 use duncan3dc\Speaker\Providers\GoogleProvider;
 
-$provider = new GoogleProvider;
+$provider = new GoogleProvider();
 
 $tts = new TextToSpeech("Hello World", $provider);
 $tts->save("/tmp/hello.mp3");

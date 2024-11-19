@@ -8,7 +8,7 @@ api: Providers.PicottsProvider
 The Picotts provider uses a local command line tool for text to speech.  
 
 ~~~php
-$provider = new PicottsProvider;
+$provider = new PicottsProvider();
 ~~~
 
 ---
