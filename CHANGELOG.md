@@ -5,7 +5,15 @@ Changelog
 
 --------
 
-## 1.4.1 - 2022-04-14
+## 1.5.0 - 2024-01-19
+
+### Added
+
+* [Providers] Added support for a different voice in VoiceRSS. ([#25](https://github.com/duncan3dc/speaker/issues/25))
+
+--------
+
+## 1.4.1 - 2024-11-18
 
 ### Fixed
 

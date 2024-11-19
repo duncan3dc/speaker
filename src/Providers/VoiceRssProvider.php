@@ -25,14 +25,18 @@ class VoiceRssProvider extends AbstractProvider
     /** @var int $speed */
     private $speed = 0;
 
+    /** @var string $voice */
+    private $voice = "Alice";
+
     /**
      * Create a new instance.
      *
      * @param string $apikey Your Voice RSS API key.
      * @param string $language The language to use.
      * @param int $speed The speech rate to use.
+     * @param string $voice The voice to use.
      */
-    public function __construct(string $apikey, string $language = null, int $speed = null)
+    public function __construct(string $apikey, string $language = null, int $speed = null, string $voice = null)
     {
         $this->apikey = $apikey;
 
@@ -42,6 +46,10 @@ class VoiceRssProvider extends AbstractProvider
 
         if ($speed !== null) {
             $this->speed = $this->getSpeed($speed);
+        }
+
+        if ($voice !== null) {
+            $this->voice = $voice;
         }
     }
 
@@ -120,10 +128,28 @@ class VoiceRssProvider extends AbstractProvider
     }
 
 
+    /**
+     * Set the voice to use.
+     *
+     * @param string $voice The voice to use (this must be compatible with the language)
+     *
+     * @return $this
+     */
+    public function withVoice(string $voice): self
+    {
+        $provider = clone $this;
+
+        $provider->voice = $voice;
+
+        return $provider;
+    }
+
+
     public function getOptions(): array
     {
         return [
             "language"  =>  $this->language,
+            "voice"     =>  $this->voice,
             "speed"     =>  $this->speed,
         ];
     }
@@ -142,6 +168,7 @@ class VoiceRssProvider extends AbstractProvider
             "key"   =>  $this->apikey,
             "src"   =>  $text,
             "hl"    =>  $this->language,
+            "v"     =>  $this->voice,
             "r"     =>  (string) $this->speed,
             "c"     =>  "MP3",
             "f"     =>  "16khz_16bit_stereo",
