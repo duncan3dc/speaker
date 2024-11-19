@@ -28,3 +28,12 @@ $provider = new VoiceRssProvider("sp39483478dhshdfs", "en-gb", -10);
 
 $provider = $provider->withSpeed(10);
 ~~~
+
+The voice that the text is read with can be set via the constructor or the `withVoice()` method:
+<p class="message-api">Note that the voice must be <a href='https://www.voicerss.org/api/'>compatible</a> with the language.</p>
+
+~~~php
+$provider = new VoiceRssProvider("sp39483478dhshdfs", "en-gb", 0, "Harry");
+
+$provider = $provider->withVoice("Harry");
+~~~
