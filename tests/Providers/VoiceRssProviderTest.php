@@ -43,7 +43,7 @@ class VoiceRssProviderTest extends TestCase
 
         $this->client->shouldReceive("request")
             ->once()
-            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&v=Alice&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->assertSame("mp3", $this->provider->textToSpeech("Hello"));
@@ -58,7 +58,7 @@ class VoiceRssProviderTest extends TestCase
 
         $this->client->shouldReceive("request")
             ->once()
-            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&v=Alice&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->expectException(ProviderException::class);
@@ -81,7 +81,7 @@ class VoiceRssProviderTest extends TestCase
 
         $this->client->shouldReceive("request")
             ->once()
-            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=fr-fr&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=fr-fr&v=Alice&r=0&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));
@@ -93,6 +93,30 @@ class VoiceRssProviderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (nope), codes should be 2 characters");
         $this->provider->withLanguage("nope");
+    }
+
+
+    /**
+     * Ensure we can set a different voice.
+     */
+    public function testWithVoice1(): void
+    {
+        $provider = $this->provider->withVoice("Harry");
+
+        # Ensure immutability
+        $this->assertSame("Harry", $provider->getOptions()["voice"]);
+        $this->assertSame("Alice", $this->provider->getOptions()["voice"]);
+
+        $response = Mockery::mock(ResponseInterface::class);
+        $response->shouldReceive("getStatusCode")->once()->andReturn("200");
+        $response->shouldReceive("getBody")->once()->andReturn(Utils::streamFor("mp3"));
+
+        $this->client->shouldReceive("request")
+            ->once()
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&v=Harry&r=0&c=MP3&f=16khz_16bit_stereo")
+            ->andReturn($response);
+
+        $this->assertSame("mp3", $provider->textToSpeech("Hello"));
     }
 
 
@@ -110,7 +134,7 @@ class VoiceRssProviderTest extends TestCase
 
         $this->client->shouldReceive("request")
             ->once()
-            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&r=-5&c=MP3&f=16khz_16bit_stereo")
+            ->with("GET", "https://api.voicerss.org/?key=APIKEY&src=Hello&hl=en-gb&v=Alice&r=-5&c=MP3&f=16khz_16bit_stereo")
             ->andReturn($response);
 
         $this->assertSame("mp3", $provider->textToSpeech("Hello"));
@@ -129,6 +153,7 @@ class VoiceRssProviderTest extends TestCase
     {
         $options = [
             "language"  =>  "en-gb",
+            "voice"     =>  "Alice",
             "speed"     =>  0,
         ];
 
@@ -138,10 +163,11 @@ class VoiceRssProviderTest extends TestCase
 
     public function testConstructorOptions1(): void
     {
-        $provider = new VoiceRssProvider("APIKEY", "ab-cd", 10);
+        $provider = new VoiceRssProvider("APIKEY", "ab-cd", 10, "Harry");
 
         $options = [
             "language"  =>  "ab-cd",
+            "voice"     =>  "Harry",
             "speed"     =>  10,
         ];
 
