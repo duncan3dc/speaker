@@ -25,14 +25,18 @@ class VoiceRssProvider extends AbstractProvider
     /** @var int $speed */
     private $speed = 0;
 
+    /** @var string $voice */
+    private $voice = 'Jack';
+
     /**
      * Create a new instance.
      *
      * @param string $apikey Your Voice RSS API key.
      * @param string $language The language to use.
      * @param int $speed The speech rate to use.
+     * @param string $voice The voice to use.
      */
-    public function __construct(string $apikey, string $language = null, int $speed = null)
+    public function __construct(string $apikey, string $language = null, int $speed = null, string $voice = null)
     {
         $this->apikey = $apikey;
 
@@ -42,6 +46,10 @@ class VoiceRssProvider extends AbstractProvider
 
         if ($speed !== null) {
             $this->speed = $this->getSpeed($speed);
+        }
+
+        if ($voice !== null) {
+            $this->voice = $voice;
         }
     }
 
@@ -68,24 +76,6 @@ class VoiceRssProvider extends AbstractProvider
         return $language;
     }
 
-
-    /**
-     * Set the language to use.
-     *
-     * @param string $language The language to use (eg 'en')
-     *
-     * @return self
-     */
-    public function withLanguage(string $language): self
-    {
-        $provider = clone $this;
-
-        $provider->language = $this->getLanguage($language);
-
-        return $provider;
-    }
-
-
     /**
      * Check the speech rate is valid.
      *
@@ -102,6 +92,21 @@ class VoiceRssProvider extends AbstractProvider
         return $speed;
     }
 
+    /**
+     * Set the language to use.
+     *
+     * @param string $language The language to use (eg 'en')
+     *
+     * @return self
+     */
+    public function withLanguage(string $language): self
+    {
+        $provider = clone $this;
+
+        $provider->language = $this->getLanguage($language);
+
+        return $provider;
+    }
 
     /**
      * Set the speech rate to use.
@@ -120,11 +125,29 @@ class VoiceRssProvider extends AbstractProvider
     }
 
 
+    /**
+     * Set the voice to use.
+     *
+     * @param string $voice The voice to use
+     *
+     * @return $this
+     */
+    public function withVoice(string $voice): self
+    {
+        $provider = clone $this;
+
+        $provider->voice = $voice;
+
+        return $provider;
+    }
+
+
     public function getOptions(): array
     {
         return [
-            "language"  =>  $this->language,
-            "speed"     =>  $this->speed,
+            "language" => $this->language,
+            "speed" => $this->speed,
+            "voice" => $this->voice,
         ];
     }
 
@@ -139,12 +162,13 @@ class VoiceRssProvider extends AbstractProvider
     public function textToSpeech(string $text): string
     {
         $result = $this->sendRequest("https://api.voicerss.org/", [
-            "key"   =>  $this->apikey,
-            "src"   =>  $text,
-            "hl"    =>  $this->language,
-            "r"     =>  (string) $this->speed,
-            "c"     =>  "MP3",
-            "f"     =>  "16khz_16bit_stereo",
+            "key" => $this->apikey,
+            "src" => $text,
+            "hl" => $this->language,
+            "r" => (string)$this->speed,
+            "c" => "MP3",
+            "f" => "16khz_16bit_stereo",
+            "v" => $this->voice,
         ]);
 
         if (substr($result, 0, 6) === "ERROR:") {
