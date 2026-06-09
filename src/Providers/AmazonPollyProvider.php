@@ -34,8 +34,6 @@ class AmazonPollyProvider implements ProviderInterface
      * Set the voice to use.
      *
      * @param string $voice The voice to use.
-     *
-     * @return $this
      */
     public function withVoice(string $voice): self
     {
@@ -85,6 +83,8 @@ class AmazonPollyProvider implements ProviderInterface
             throw new ProviderException("Failed to call the external text-to-speech service", $e->getCode(), $e);
         }
 
-        return (string) $result->get("AudioStream");
+        /** @var string $data */
+        $data = $result->get("AudioStream");
+        return (string) $data;
     }
 }

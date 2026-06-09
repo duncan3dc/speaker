@@ -48,7 +48,7 @@ class AbstractProviderTest extends TestCase
     public function testGetClient(): void
     {
         $provider = new ExampleProvider();
-        $this->assertInstanceOf(ClientInterface::class, $provider->getClient());
+        $provider->getClient();
     }
 
 

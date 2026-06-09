@@ -109,8 +109,6 @@ class VoiceRssProvider extends AbstractProvider
      * Set the speech rate to use.
      *
      * @param int $speed The speech rate to use (between -10 and 10)
-     *
-     * @return $this
      */
     public function withSpeed(int $speed): self
     {
@@ -126,8 +124,6 @@ class VoiceRssProvider extends AbstractProvider
      * Set the voice to use.
      *
      * @param string $voice The voice to use (this must be compatible with the language)
-     *
-     * @return $this
      */
     public function withVoice(string $voice): self
     {

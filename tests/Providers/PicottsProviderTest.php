@@ -91,7 +91,7 @@ class PicottsProviderTest extends TestCase
         $program = $this->getProgram();
 
         # Get the specified filename and write some test data to it
-        $program->shouldReceive("getResult")->with(Mockery::on(function ($option) {
+        $program->shouldReceive("getResult")->with(Mockery::on(function (string $option) {
             if (substr($option, 0, 7) === "--wave=") {
                 $filename = substr($option, 7);
                 file_put_contents($filename, "test-data");
