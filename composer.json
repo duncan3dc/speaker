@@ -14,7 +14,7 @@
     "require": {
         "duncan3dc/exec": "^0.4 || ^1.0",
         "guzzlehttp/guzzle": "^6.0|^7.0",
-        "php": "^7.3 || ^8.0"
+        "php": "^8.1"
     },
     "require-dev": {
         "aws/aws-sdk-php": "^3.219.3",
