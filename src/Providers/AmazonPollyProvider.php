@@ -25,9 +25,9 @@ class AmazonPollyProvider implements ProviderInterface
      * Create a new instance.
      *
      * @param PollyClient $client The client to interact with
-     * @param string $voice The voice to use
+     * @param ?string $voice The voice to use
      */
-    public function __construct(PollyClient $client, string $voice = null)
+    public function __construct(PollyClient $client, ?string $voice = null)
     {
         $this->client = $client;
         if ($voice !== null) {

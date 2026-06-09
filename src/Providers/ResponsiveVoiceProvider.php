@@ -24,9 +24,9 @@ class ResponsiveVoiceProvider extends AbstractProvider
     /**
      * Create a new instance.
      *
-     * @param string $language The language to use
+     * @param ?string $language The language to use
      */
-    public function __construct(string $language = null)
+    public function __construct(?string $language = null)
     {
         if ($language !== null) {
             $this->language = $this->getLanguage($language);

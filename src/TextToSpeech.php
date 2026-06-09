@@ -101,11 +101,11 @@ class TextToSpeech implements TextToSpeechInterface
      * This function uses caching so if the file already exists
      * a call to the text-to-speech service is not made.
      *
-     * @param string $path The path to the directory to store the file in
+     * @param ?string $path The path to the directory to store the file in
      *
      * @return string The full path and filename
      */
-    public function getFile(string $path = null): string
+    public function getFile(?string $path = null): string
     {
         if ($path === null) {
             $path = sys_get_temp_dir();

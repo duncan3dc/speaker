@@ -40,9 +40,9 @@ class PicottsProvider extends AbstractProvider
     /**
      * Create a new instance.
      *
-     * @param string $language The language to use
+     * @param ?string $language The language to use
      */
-    public function __construct(string $language = null)
+    public function __construct(?string $language = null)
     {
         $pico = trim((string) exec("which pico2wave"));
         if (!file_exists($pico)) {
@@ -123,11 +123,11 @@ class PicottsProvider extends AbstractProvider
      * Convert the specified text to audio.
      *
      * @param string $text The text to convert
-     * @param FactoryInterface $factory
+     * @param ?FactoryInterface $factory
      *
      * @return string The audio data
      */
-    public function textToSpeech(string $text, FactoryInterface $factory = null): string
+    public function textToSpeech(string $text, ?FactoryInterface $factory = null): string
     {
         $filename = sys_get_temp_dir() . \DIRECTORY_SEPARATOR . "speaker_picotts_{$this->language}_" . md5($text) . ".wav";
 

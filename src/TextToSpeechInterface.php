@@ -38,9 +38,9 @@ interface TextToSpeechInterface
     /**
      * Store the audio file on the filesystem.
      *
-     * @param string $path The path to the directory to store the file in
+     * @param ?string $path The path to the directory to store the file in
      *
      * @return string The full path and filename
      */
-    public function getFile(string $path = null): string;
+    public function getFile(?string $path = null): string;
 }

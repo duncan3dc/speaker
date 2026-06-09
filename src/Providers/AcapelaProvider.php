@@ -45,10 +45,10 @@ class AcapelaProvider extends AbstractProvider
      * @param string $login The username to access the service
      * @param string $application The name of the application
      * @param string $password The password to access the service
-     * @param string $voice The voice to use
-     * @param int $speed The speech rate
+     * @param ?string $voice The voice to use
+     * @param ?int $speed The speech rate
      */
-    public function __construct(string $login, string $application, string $password, string $voice = null, int $speed = null)
+    public function __construct(string $login, string $application, string $password, ?string $voice = null, ?int $speed = null)
     {
         $this->login = $login;
         $this->application = $application;

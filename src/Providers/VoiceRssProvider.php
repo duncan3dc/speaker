@@ -32,11 +32,11 @@ class VoiceRssProvider extends AbstractProvider
      * Create a new instance.
      *
      * @param string $apikey Your Voice RSS API key.
-     * @param string $language The language to use.
-     * @param int $speed The speech rate to use.
-     * @param string $voice The voice to use.
+     * @param ?string $language The language to use.
+     * @param ?int $speed The speech rate to use.
+     * @param ?string $voice The voice to use.
      */
-    public function __construct(string $apikey, string $language = null, int $speed = null, string $voice = null)
+    public function __construct(string $apikey, ?string $language = null, ?int $speed = null, ?string $voice = null)
     {
         $this->apikey = $apikey;
 
