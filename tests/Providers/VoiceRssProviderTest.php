@@ -18,6 +18,7 @@ class VoiceRssProviderTest extends TestCase
 
     private ClientInterface&MockInterface $client;
 
+
     protected function setUp(): void
     {
         $this->provider = new VoiceRssProvider("APIKEY");
@@ -150,9 +151,9 @@ class VoiceRssProviderTest extends TestCase
     public function testGetOptions(): void
     {
         $options = [
-            "language"  =>  "en-gb",
-            "voice"     =>  "Alice",
-            "speed"     =>  0,
+            "language" => "en-gb",
+            "voice" => "Alice",
+            "speed" => 0,
         ];
 
         $this->assertSame($options, $this->provider->getOptions());
@@ -164,19 +165,23 @@ class VoiceRssProviderTest extends TestCase
         $provider = new VoiceRssProvider("APIKEY", "ab-cd", 10, "Harry");
 
         $options = [
-            "language"  =>  "ab-cd",
-            "voice"     =>  "Harry",
-            "speed"     =>  10,
+            "language" => "ab-cd",
+            "voice" => "Harry",
+            "speed" => 10,
         ];
 
         $this->assertSame($options, $provider->getOptions());
     }
+
+
     public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected language code (who?), codes should be 2 characters");
         new VoiceRssProvider("APIKEY", "who?");
     }
+
+
     public function testConstructorOptions3(): void
     {
         $this->expectException(InvalidArgumentException::class);

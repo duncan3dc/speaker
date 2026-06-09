@@ -14,6 +14,7 @@ class GoogleProvider extends AbstractProvider
 {
     private string $language = "en";
 
+
     /**
      * Create a new instance.
      *
@@ -66,7 +67,7 @@ class GoogleProvider extends AbstractProvider
     public function getOptions(): array
     {
         return [
-            "language"  =>  $this->language,
+            "language" => $this->language,
         ];
     }
 
@@ -85,9 +86,9 @@ class GoogleProvider extends AbstractProvider
         }
 
         return $this->sendRequest("http://translate.google.com/translate_tts", [
-            "q"         =>  $text,
-            "tl"        =>  $this->language,
-            "client"    =>  "duncan3dc-speaker",
+            "q" => $text,
+            "tl" => $this->language,
+            "client" => "duncan3dc-speaker",
         ]);
     }
 }

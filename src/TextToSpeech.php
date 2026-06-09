@@ -31,6 +31,7 @@ class TextToSpeech implements TextToSpeechInterface
      */
     private ?string $data = null;
 
+
     /**
      * Create a new instance.
      *

@@ -66,7 +66,7 @@ class AmazonPollyProviderTest extends TestCase
     public function testGetOptions(): void
     {
         $options = [
-            "voice" =>  "Emma",
+            "voice" => "Emma",
         ];
 
         $this->assertSame($options, $this->provider->getOptions());

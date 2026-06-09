@@ -59,7 +59,7 @@ class AmazonPollyProvider implements ProviderInterface
     public function getOptions(): array
     {
         return [
-            "voice" =>  $this->voice,
+            "voice" => $this->voice,
         ];
     }
 
@@ -75,9 +75,9 @@ class AmazonPollyProvider implements ProviderInterface
     {
         try {
             $result = $this->client->synthesizeSpeech([
-                "OutputFormat"  => $this->getFormat(),
-                "Text"          => $text,
-                "VoiceId"       => $this->voice,
+                "OutputFormat" => $this->getFormat(),
+                "Text" => $text,
+                "VoiceId" => $this->voice,
             ]);
         } catch (\Throwable $e) {
             throw new ProviderException("Failed to call the external text-to-speech service", $e->getCode(), $e);

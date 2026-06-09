@@ -17,6 +17,7 @@ class GoogleProviderTest extends TestCase
 
     private ClientInterface&MockInterface $client;
 
+
     protected function setUp(): void
     {
         $this->provider = new GoogleProvider();
@@ -79,7 +80,7 @@ class GoogleProviderTest extends TestCase
     public function testGetOptions(): void
     {
         $options = [
-            "language"  =>  "en",
+            "language" => "en",
         ];
 
         $this->assertSame($options, $this->provider->getOptions());
@@ -100,6 +101,8 @@ class GoogleProviderTest extends TestCase
 
         $this->assertSame("de", $provider->getOptions()["language"]);
     }
+
+
     public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);

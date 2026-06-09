@@ -17,6 +17,7 @@ class AcapelaProviderTest extends TestCase
 
     private ClientInterface&MockInterface $client;
 
+
     protected function setUp(): void
     {
         $this->provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD");
@@ -108,8 +109,8 @@ class AcapelaProviderTest extends TestCase
     public function testGetOptions(): void
     {
         $options = [
-            "voice" =>  "rod",
-            "speed" =>  180,
+            "voice" => "rod",
+            "speed" => 180,
         ];
 
         $this->assertSame($options, $this->provider->getOptions());
@@ -129,18 +130,22 @@ class AcapelaProviderTest extends TestCase
         $provider = new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "lucy", 190);
 
         $options = [
-            "voice" =>  "lucy",
-            "speed" =>  190,
+            "voice" => "lucy",
+            "speed" => 190,
         ];
 
         $this->assertSame($options, $provider->getOptions());
     }
+
+
     public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Unexpected voice name (no), names should be at least 3 characters long");
         new AcapelaProvider("LOGIN", "APPLICATION", "PASSWORD", "no");
     }
+
+
     public function testConstructorOptions3(): void
     {
         $this->expectException(InvalidArgumentException::class);

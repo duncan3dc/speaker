@@ -17,6 +17,7 @@ class ResponsiveVoiceProviderTest extends TestCase
 
     private ClientInterface&MockInterface $client;
 
+
     protected function setUp(): void
     {
         $this->provider = new ResponsiveVoiceProvider();
@@ -69,7 +70,7 @@ class ResponsiveVoiceProviderTest extends TestCase
     public function testGetOptions(): void
     {
         $options = [
-            "language"  =>  "en-GB",
+            "language" => "en-GB",
         ];
 
         $this->assertSame($options, $this->provider->getOptions());
@@ -82,6 +83,8 @@ class ResponsiveVoiceProviderTest extends TestCase
 
         $this->assertSame("de-DE", $provider->getOptions()["language"]);
     }
+
+
     public function testConstructorOptions2(): void
     {
         $this->expectException(InvalidArgumentException::class);

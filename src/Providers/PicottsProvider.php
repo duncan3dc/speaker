@@ -114,7 +114,7 @@ class PicottsProvider extends AbstractProvider
     public function getOptions(): array
     {
         return [
-            "language"  =>  $this->language,
+            "language" => $this->language,
         ];
     }
 

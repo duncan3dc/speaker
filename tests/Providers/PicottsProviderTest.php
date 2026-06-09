@@ -174,7 +174,7 @@ class PicottsProviderTest extends TestCase
         $provider = $this->getProvider();
 
         $options = [
-            "language"  =>  "en-US",
+            "language" => "en-US",
         ];
 
         $this->assertSame($options, $provider->getOptions());
@@ -189,6 +189,8 @@ class PicottsProviderTest extends TestCase
 
         $this->assertSame("fr-FR", $provider->getOptions()["language"]);
     }
+
+
     public function testConstructorOptions2(): void
     {
         $this->setupBinary();

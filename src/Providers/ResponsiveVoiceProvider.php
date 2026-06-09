@@ -18,6 +18,7 @@ class ResponsiveVoiceProvider extends AbstractProvider
 {
     private string $language = "en-GB";
 
+
     /**
      * Create a new instance.
      *
@@ -77,7 +78,7 @@ class ResponsiveVoiceProvider extends AbstractProvider
     public function getOptions(): array
     {
         return [
-            "language"  =>  $this->language,
+            "language" => $this->language,
         ];
     }
 
@@ -92,8 +93,8 @@ class ResponsiveVoiceProvider extends AbstractProvider
     public function textToSpeech(string $text): string
     {
         return $this->sendRequest("https://code.responsivevoice.org/getvoice.php", [
-            "tl"        =>  $this->language,
-            "t"         =>  $text,
+            "tl" => $this->language,
+            "t" => $text,
         ]);
     }
 }

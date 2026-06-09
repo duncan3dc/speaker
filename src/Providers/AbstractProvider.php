@@ -18,6 +18,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     private ?ClientInterface $client = null;
 
+
     /**
      * Get the guzzle client instance to use.
      */

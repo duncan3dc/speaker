@@ -14,6 +14,7 @@ interface ProviderInterface
      */
     public function getFormat(): string;
 
+
     /**
      * Get the current options.
      *
@@ -23,6 +24,7 @@ interface ProviderInterface
      * @return array<string, string|int>
      */
     public function getOptions(): array;
+
 
     /**
      * Convert the specified text to audio.

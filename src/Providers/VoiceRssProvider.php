@@ -24,6 +24,7 @@ class VoiceRssProvider extends AbstractProvider
 
     private string $voice = "Alice";
 
+
     /**
      * Create a new instance.
      *
@@ -138,9 +139,9 @@ class VoiceRssProvider extends AbstractProvider
     public function getOptions(): array
     {
         return [
-            "language"  =>  $this->language,
-            "voice"     =>  $this->voice,
-            "speed"     =>  $this->speed,
+            "language" => $this->language,
+            "voice" => $this->voice,
+            "speed" => $this->speed,
         ];
     }
 
@@ -155,13 +156,13 @@ class VoiceRssProvider extends AbstractProvider
     public function textToSpeech(string $text): string
     {
         $result = $this->sendRequest("https://api.voicerss.org/", [
-            "key"   =>  $this->apikey,
-            "src"   =>  $text,
-            "hl"    =>  $this->language,
-            "v"     =>  $this->voice,
-            "r"     =>  (string) $this->speed,
-            "c"     =>  "MP3",
-            "f"     =>  "16khz_16bit_stereo",
+            "key" => $this->apikey,
+            "src" => $text,
+            "hl" => $this->language,
+            "v" => $this->voice,
+            "r" => (string) $this->speed,
+            "c" => "MP3",
+            "f" => "16khz_16bit_stereo",
         ]);
 
         if (substr($result, 0, 6) === "ERROR:") {
