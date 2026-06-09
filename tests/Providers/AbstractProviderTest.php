@@ -7,6 +7,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Utils;
 use Mockery;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -43,6 +44,7 @@ class AbstractProviderTest extends TestCase
     }
 
 
+    #[DoesNotPerformAssertions]
     public function testGetClient(): void
     {
         $provider = new ExampleProvider();
