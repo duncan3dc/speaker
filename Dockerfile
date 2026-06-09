@@ -11,3 +11,4 @@ RUN apt update && apt install -y git zip
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
+RUN git config --global --add safe.directory /app
