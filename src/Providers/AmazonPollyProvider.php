@@ -10,15 +10,9 @@ use duncan3dc\Speaker\Exceptions\ProviderException;
  */
 class AmazonPollyProvider implements ProviderInterface
 {
-    /**
-     * @var PollyClient client The client to interact with.
-     */
-    private $client;
+    private PollyClient $client;
 
-    /**
-     * @var string $voice The voice to use.
-     */
-    private $voice = "Emma";
+    private string $voice = "Emma";
 
 
     /**

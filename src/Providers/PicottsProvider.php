@@ -29,12 +29,12 @@ class PicottsProvider extends AbstractProvider
     /**
      * @var string $pico The picotts program.
      */
-    private $pico;
+    private string $pico;
 
     /**
      * @var string $language The language to use.
      */
-    private $language = "en-US";
+    private string $language = "en-US";
 
 
     /**

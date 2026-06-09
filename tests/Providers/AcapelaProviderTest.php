@@ -13,11 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class AcapelaProviderTest extends TestCase
 {
-    /** @var AcapelaProvider */
-    private $provider;
+    private AcapelaProvider $provider;
 
-    /** @var ClientInterface|MockInterface */
-    private $client;
+    private ClientInterface&MockInterface $client;
 
     protected function setUp(): void
     {

@@ -11,15 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class AmazonPollyProviderTest extends TestCase
 {
-    /**
-     * @var AmazonPollyProvider $provider The provider to test.
-     */
-    private $provider;
+    private AmazonPollyProvider $provider;
 
-    /**
-     * @var PollyClient|MockInterface $client The amazon polly client.
-     */
-    private $client;
+    private PollyClient&MockInterface $client;
 
 
     protected function setUp(): void

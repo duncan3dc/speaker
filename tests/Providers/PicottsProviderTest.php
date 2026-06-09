@@ -22,14 +22,12 @@ use function unlink;
 
 class PicottsProviderTest extends TestCase
 {
-    /** @var string|null */
-    private $binary;
+    private ?string $binary = null;
 
-    /** @var FactoryInterface&MockInterface */
-    private $factory;
+    private FactoryInterface&MockInterface $factory;
 
     /** @var ResultInterface<string>&MockInterface */
-    private $result;
+    private ResultInterface&MockInterface $result;
 
 
     protected function setUp(): void
@@ -67,10 +65,7 @@ class PicottsProviderTest extends TestCase
     }
 
 
-    /**
-     * @return ProgramInterface&MockInterface
-     */
-    private function getProgram(): ProgramInterface
+    private function getProgram(): ProgramInterface&MockInterface
     {
         $program = Mockery::mock(ProgramInterface::class);
 

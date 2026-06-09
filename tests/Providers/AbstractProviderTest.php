@@ -12,11 +12,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class AbstractProviderTest extends TestCase
 {
-    /** @var ExampleProvider */
-    private $provider;
+    private ExampleProvider $provider;
 
-    /** @var ClientInterface|MockInterface */
-    private $client;
+    private ClientInterface&MockInterface $client;
 
 
     protected function setUp(): void

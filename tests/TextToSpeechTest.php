@@ -15,11 +15,9 @@ use function unlink;
 
 class TextToSpeechTest extends TestCase
 {
-    /** @var ProviderInterface&MockInterface  */
-    private $provider;
+    private ProviderInterface&MockInterface $provider;
 
-    /** @var TextToSpeech */
-    private $tts;
+    private TextToSpeech $tts;
 
 
     protected function setUp(): void

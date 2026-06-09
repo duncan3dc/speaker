@@ -12,10 +12,7 @@ use function trim;
  */
 class GoogleProvider extends AbstractProvider
 {
-    /**
-     * @var string $language The language to use.
-     */
-    private $language = "en";
+    private string $language = "en";
 
     /**
      * Create a new instance.

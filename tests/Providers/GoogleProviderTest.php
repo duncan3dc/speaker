@@ -13,11 +13,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class GoogleProviderTest extends TestCase
 {
-    /** @var GoogleProvider */
-    private $provider;
+    private GoogleProvider $provider;
 
-    /** @var ClientInterface|MockInterface */
-    private $client;
+    private ClientInterface&MockInterface $client;
 
     protected function setUp(): void
     {

@@ -16,10 +16,7 @@ use function trim;
  */
 class ResponsiveVoiceProvider extends AbstractProvider
 {
-    /**
-     * @var string $language The language to use.
-     */
-    private $language = "en-GB";
+    private string $language = "en-GB";
 
     /**
      * Create a new instance.

@@ -19,17 +19,17 @@ class TextToSpeech implements TextToSpeechInterface
     /**
      * @var string $text The text to convert.
      */
-    private $text;
+    private string $text;
 
     /**
      * @var ProviderInterface $provider The provider instance to handle text conversion.
      */
-    private $provider;
+    private ProviderInterface $provider;
 
     /**
-     * @var string $data The audio data.
+     * @var ?string $data The audio data.
      */
-    private $data;
+    private ?string $data = null;
 
     /**
      * Create a new instance.

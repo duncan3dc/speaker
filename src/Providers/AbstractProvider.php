@@ -16,14 +16,10 @@ abstract class AbstractProvider implements ProviderInterface
     /**
      * @var ClientInterface $client A guzzle instance for http requests.
      */
-    private $client;
+    private ?ClientInterface $client = null;
 
     /**
      * Get the guzzle client instance to use.
-     *
-     * @param ClientInterface $client
-     *
-     * @return ProviderInterface
      */
     public function setClient(ClientInterface $client): ProviderInterface
     {
@@ -35,8 +31,6 @@ abstract class AbstractProvider implements ProviderInterface
 
     /**
      * Get the guzzle client.
-     *
-     * @return ClientInterface
      */
     public function getClient(): ClientInterface
     {
@@ -50,8 +44,6 @@ abstract class AbstractProvider implements ProviderInterface
 
     /**
      * Get the format of this audio.
-     *
-     * @return string
      */
     public function getFormat(): string
     {

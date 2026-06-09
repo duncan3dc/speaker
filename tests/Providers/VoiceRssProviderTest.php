@@ -14,11 +14,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class VoiceRssProviderTest extends TestCase
 {
-    /** @var VoiceRssProvider */
-    private $provider;
+    private VoiceRssProvider $provider;
 
-    /** @var ClientInterface|MockInterface */
-    private $client;
+    private ClientInterface&MockInterface $client;
 
     protected function setUp(): void
     {

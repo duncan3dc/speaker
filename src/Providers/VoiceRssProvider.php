@@ -16,17 +16,13 @@ use function trim;
  */
 class VoiceRssProvider extends AbstractProvider
 {
-    /** @var string */
-    private $apikey;
+    private string $apikey;
 
-    /** @var string */
-    private $language = "en-gb";
+    private string $language = "en-gb";
 
-    /** @var int $speed */
-    private $speed = 0;
+    private int $speed = 0;
 
-    /** @var string $voice */
-    private $voice = "Alice";
+    private string $voice = "Alice";
 
     /**
      * Create a new instance.
@@ -98,10 +94,8 @@ class VoiceRssProvider extends AbstractProvider
      * Check the speech rate is valid.
      *
      * @param int $speed The speech rate to use
-     *
-     * @return int
      */
-    private function getSpeed(int $speed)
+    private function getSpeed(int $speed): int
     {
         if ($speed < -10 || $speed > 10) {
             throw new InvalidArgumentException("Invalid speed ({$speed}), must be a number between -10 and 10");
