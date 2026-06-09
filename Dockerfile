@@ -1,7 +1,11 @@
 ARG PHP_VERSION=8.1
 FROM php:${PHP_VERSION}-cli
 
-RUN pecl install uopz || pecl install uopz-6.1.2 && docker-php-ext-enable uopz
+RUN apt update && apt install -y curl zip
+RUN curl -L https://github.com/krakjoe/uopz/archive/14c8fc2d6eff14ec9acd926b9cab85d6961c64ac.zip -o /tmp/uopz.zip
+RUN unzip /tmp/uopz.zip -d /tmp
+RUN cd /tmp/uopz-14c8fc2d6eff14ec9acd926b9cab85d6961c64ac && phpize && ./configure --enable-uopz && make && make install
+RUN docker-php-ext-enable uopz
 RUN echo "uopz.exit=1" >> /usr/local/etc/php/conf.d/docker-php-ext-uopz.ini
 
 ARG COVERAGE
