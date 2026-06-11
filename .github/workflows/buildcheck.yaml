@@ -1,11 +1,9 @@
 name: buildcheck
-
-on:
-  push:
-  pull_request:
+"on":
+  push: null
+  pull_request: null
   schedule:
     - cron: 0 10 13 * *
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,34 +16,27 @@ jobs:
           - "8.3"
           - "8.4"
           - "8.5"
+          - "8"
         composer:
           - ""
           - "--prefer-lowest"
-
     steps:
       - uses: actions/checkout@v6
-
       - name: Create Docker Container
         run: |
           docker build . -t ci-image --build-arg PHP_VERSION=${{ matrix.php }}
           docker run --interactive --detach --volume ${{ github.workspace }}:/app --name ci ci-image
-
       - name: Install Dependencies
         run: docker exec ci composer update --no-interaction --no-ansi --prefer-dist ${{ matrix.composer }}
-
       - name: PHPUnit
         run: docker exec ci vendor/bin/phpunit
-
       - name: PHPStan
         run: |
           docker exec ci vendor/bin/phpstan analyse --level=max src
           docker exec ci vendor/bin/phpstan analyse --level=max --configuration=phpstan-tests.neon tests
-
       - name: Coding Standards
         run: docker exec ci vendor/bin/phpcs
-
       - name: Check Dependencies
         run: docker exec ci vendor/bin/composer-require-checker --config-file=.require.json
-
       - name: Composer Validate
         run: docker exec ci composer validate --strict
